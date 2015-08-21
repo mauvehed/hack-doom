@@ -1,7 +1,7 @@
 #include "zcommon.acs"
 
 // This script allows spawning of enemies at given spawners in a level
-// Spawner:  three digit tag number of the MapSpot
+// Spawner:  tag number of the MapSpot (form is: <01-99 for Hackdoor area><01-99 for sequential MapSpot>)
 // MonstType:  spawn number of the monster to spawn
 // MonstID:  normally not used
 script 3 (int Spawner, int MonstType, int MonstID) net
