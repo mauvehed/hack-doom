@@ -1,7 +1,0 @@
-#include "zcommon.acs"
-
-// The generic "open door" script.  Takes one variable, the door sector
-script 2 (int DoorSector) net
-{
-   Door_Open(DoorSector, 10);
-}
