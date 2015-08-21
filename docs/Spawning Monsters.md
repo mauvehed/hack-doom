@@ -6,7 +6,7 @@ Spawning monsters relies on having monster spawns in a map.  These are located u
 
 ## Script Control ##
 To control monster spawns you're going to want to include the *spawnEnemy.acs* code in your SCRIPTS lump.  It takes a number of variables:
-* *Spawner*:  tag number of the MapSpot.
+* *Spawner*:  tag number of the Hackdoor for this area concatenated with the sequential MapSpot for the area.
 * *MonstType*:  spawn number of the monster to spawn (list available on the [ZDoom Wiki](http://www.zdoom.org/wiki/Doom_spawn_numbers))
 * *MonstID*:  normally not used, "999" is an acceptable choice by default.
 
