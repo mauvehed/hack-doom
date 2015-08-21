@@ -1,0 +1,10 @@
+#include "zcommon.acs"
+
+// This script allows spawning of enemies at given spawners in a level
+// Spawner:  three digit tag number of the MapSpot
+// MonstType:  spawn number of the monster to spawn
+// MonstID:  normally not used
+script 3 (int Spawner, int MonstType, int MonstID) net
+{
+	Thing_SpawnFacing(Spawner, MonstType, 0, MonstID);
+}
