@@ -19,8 +19,9 @@ The other directories contain the source material used to create the archive.  T
 For most cases, the prebuilt *hackdoom.pk3* in the base of the *assets* directory should be sufficient.  However, if you wish to build it yourself it is not complicated.  I will cover using [SLADE](http://slade.mancubus.net/) though any archive editor and [ACC](http://zdoom.org/wiki/ACC) will be just fine.
 * Open SLADE and create a new archive in the base of *assets* called *hackdoom.pk3*.
 * Import File and select *hack-doom/assets/acs/hackdoom.acs* file for import.
-* Select the file, then click, "compile ACS." This will create a *acs* subdirectory with the *hackdoom.acs* compiled ACC object (likely called *hackdoom.acs*.  If not, simply rename it so.)
-** If you had not configured SLADE to locate ACC it will prompt you to do so.
+* Select the file, then click, "compile ACS." This will create a *acs* subdirectory with the *hackdoom.acs* compiled ACC object.
+ * If you had not configured SLADE to locate ACC it will prompt you to do so.
+ * If you get a *hackdoom.o* instead of a compiled *hackdoom.acs* simply rename it though it may work just fine.
 * Save the archive, close SLADE.
 
 ## Level Preparation ##
