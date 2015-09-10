@@ -1,0 +1,24 @@
+#library "hackdoom"
+#include "zcommon.acs"
+
+// The opening text for players
+script "HackDoom Welcome" OPEN 
+{
+    print(s:"Welcome to Hack Doom, prepare yourself!");
+}
+
+// This script allows Hackdoors to function.
+// Hackdoor:  Tag of the sector of the Hackdoor
+script "HackDoom OpenHackdoor" (int Hackdoor) net
+{
+   Door_Open(Hackdoor, 10);
+}
+
+// This script allows spawning of enemies at given spawners in a level
+// Spawner:  tag number of the MapSpot (form is: <01-99 for Hackdoor area><01-99 for sequential MapSpot>)
+// MonstType:  spawn number of the monster to spawn
+// MonstID:  normally not used
+script "HackDoom SpawnEnemy" (int Spawner, int MonstType, int MonstID) net
+{
+	Thing_SpawnFacing(Spawner, MonstType, 0, MonstID);
+}

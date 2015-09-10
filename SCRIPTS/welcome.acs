@@ -1,7 +1,0 @@
-#include "zcommon.acs"
-
-// The opening text for players
-script 1 OPEN 
-{
-    print(s:"Welcome to Hack Doom, prepare yourself!");
-}

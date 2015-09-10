@@ -1,8 +1,0 @@
-#include "zcommon.acs"
-
-// This script allows Hackdoors to function.
-// Hackdoor:  Tag of the sector of the Hackdoor
-script 2 (int Hackdoor) net
-{
-   Door_Open(Hackdoor, 10);
-}
