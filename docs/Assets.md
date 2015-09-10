@@ -4,7 +4,7 @@ Assets are the required files for Hack Doom conveniently packaged into an archiv
 ## Directory Structure ##
 In the base of the *assets* directory are the compiled files, notably the *hackdoom.pk3* archive, that are required to be loaded for play.  WAD files created in the *levels* directory must be designed to be loaded with the *hackdoom.pk3* compiled archive.
 
-The other directories contain the source material used to create the archive.  They conform to the ZDoom Wiki []specification](http://zdoom.org/wiki/Using_ZIPs_as_WAD_replacement) though not all are required to be present.  This includes the following:
+The other directories contain the source material used to create the archive.  They conform to the ZDoom Wiki [specification](http://zdoom.org/wiki/Using_ZIPs_as_WAD_replacement) though not all are required to be present.  This includes the following:
 * **acs**:  contains ACS libraries.
 * **flats**:  *flats* files.
 * **graphics**:  special graphics not present in WADs.
