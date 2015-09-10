@@ -30,7 +30,7 @@ Aside from the usual conventions for creating levels a small amount of modificat
 * Create a new lump ("Entry" in SLADE) and call it LOADACS.
 * Type the following into the entry:
 
-> hackdoom // Hack Doom scripts
+> hackdoom // HackDoom scripts
 
 * Save the lump / Entry, save the WAD, close your chosen editor.
 
