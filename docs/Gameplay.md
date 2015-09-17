@@ -14,15 +14,47 @@ Marines is the gamer team component.  Its 1 - 4 players will be responsible for 
 ## Area ##
 An Area is the section of a level revealed by a preceeding Hackdoor.  So in this case all things within the area beyond the first Hackdoor but before the second are part of Area 1, all the things beyond the second Hackdoor but before the third is Area 2, and so forth.
 
+## Challenges ##
+Challenges are what Control completes for points, PowerUps, and progression.  They take the form of CTF challenges hosted on the scoreboard and are broken down into two types.
+### Core Challenges ###
+Core challenges are unlocked by Marines via hitting the Hackswitch in each Area.  Completing a Core challenge for an Area immediately disables the others.  When Control completes one the following happens:
+* the point value of the challenge is recorded.
+* the completed Core challenge is disabled.
+* the other Core challenges for the current Area are locked.
+* Enemy Spawners in the current Area are disabled.
+* Enemy Spawners in the next Area are enabled.
+* the Hackdoor to the next Area opens.
+
+### Edge Challenges ###
+Edge challenges are unlocked by Marines finding the secret area in each Area.  Edge challenges may only be completed once, but all are available for choosing.  When Control completes one the following happens:
+* Control chooses a PowerUp to drop in via the PowerUp Spawner for that Area.
+* the chosen PowerUp is spawned via that Area's PowerUp Spawner.
+* the completed Edge challenge is disabled.
+* all non-completed Edge challenges are locked.
+* the PowerUp Spawner for that Area is disabled.
+
 ## Hackdoor ##
-Hackdoors are special doors that are only able to be opened by Control team.  There is only one per Area and it unlocks the next Area.
+Hackdoors are special doors that are only able to be opened by Control.  There is only one per Area and it is unlocked via Core challenges.
+
+## Hackswitch ##
+Hackswitches are special switches that are only able to be activated by Marines.  There is only one per Area and it unlocks the next Area's Core challenges.
 
 ## PowerUp ##
-PowerUps are one-time use item spawned by the server.  There is only one spawner per Area and each item may only be spawned once ever, regardless of Area.  The server will automatically pick to spawn it in the area most recently unlocked.
+PowerUps are powerful items spawned by the server.  They are dropped into the game via one-time use PowerUp Spawners.  Available PowerUps include:
+* Megahealth
+* Invincibility
+* Radiation Suit
+* Backpack full of ammo
+* Berserk
+* Weapons
+* Ammo
 
 ## Spawners ##
 ### Enemy Spawner ###
 One of two types of spawner is the Enemy Spawner, a ZDoom MapSpot where enemies can be instantaneously created by the server.  Enemy Spawners in an Area will continually spawn until the next Hackdoor is unlocked.
 
 ### PowerUp Spawner ###
-The second type of spawner is the PowerUp Spawner, a ZDoom MapSpot where PowerUps can be instantaneously created by the server.  There is only one per Area.
+The second type of spawner is the PowerUp Spawner, a ZDoom MapSpot where PowerUps can be instantaneously created by the server.  There is only one per Area, is unlocked by the secret area within that Area, and can only be used once via Edge challenge.
+
+# Secrets #
+Secrets are secret areas used to unlock PowerUp Spawners and Edge challenges.  There is only one per Area and it unlocks locked Edge challenges as well as the Area's PowerUp Spawner.
