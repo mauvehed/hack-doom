@@ -1,10 +1,10 @@
 # Hackdoors #
-__Hackdoors__ are the most integral part of Hack Doom.  They guard progression and are unable to be opened by Marines, only by Control.  When Control complete challenges they will be able to open the Hackdoors, clearing the way for Marines to complete levels.
+__Hackdoors__ are the most integral part of Hack Doom.  They guard progression and are unable to be opened by Marines, only by Control.  When Control completes Core challenges they will be able to open the Hackdoors, clearing the way for Marines to complete levels.
 
-## Level Editing ##
-Hackdoors rely on having appropriately themed doors that lock progression to new areas of the map.  The style may be unique for every map but for players' sanity should all look identical and unique to everything else in the level.  Hackdoors are Doors but should not respond to any player input (use, shoot, or otherwise interact with).
+# Level Editing #
+Hackdoors rely on having appropriately themed doors that lock progression to new Areas of the map.  The style may be unique for every map but for players' sanity should all look identical and unique to everything else in the level.  Hackdoors are Doors but should not respond to any player input (use, shoot, or otherwise interact with).
 
-## Tags ##
+# Tags #
 Hackdoors __must__ be tagged with an appropriate sector tag. Every Hackdoor must have a unique tag from 01-99 in ascending order depending on how many you have (a good rule of thumb is five).  These first 1-99 sector tags must NOT be used elsewhere in the map.
 
 ## Script Control ##
