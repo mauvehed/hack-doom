@@ -1,5 +1,5 @@
-# Opening Hackdoors #
-__Hackdoors__ are the most integral part of Hack Doom.  They guard progression and are unable to be opened by the players, only by the hackers.  When Hackers complete challenges they will be able to open the Hackdoors, clearing the way for the players to complete levels.
+# Hackdoors #
+__Hackdoors__ are the most integral part of Hack Doom.  They guard progression and are unable to be opened by Marines, only by Control.  When Control complete challenges they will be able to open the Hackdoors, clearing the way for Marines to complete levels.
 
 ## Level Editing ##
 Hackdoors rely on having appropriately themed doors that lock progression to new areas of the map.  The style may be unique for every map but for players' sanity should all look identical and unique to everything else in the level.  Hackdoors are Doors but should not respond to any player input (use, shoot, or otherwise interact with).
