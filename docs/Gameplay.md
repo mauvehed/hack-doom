@@ -20,8 +20,9 @@ Hackdoors are special doors that are only able to be opened by Control team.  Th
 ## PowerUp ##
 PowerUps are one-time use item spawned by the server.  There is only one spawner per Area and each item may only be spawned once ever, regardless of Area.  The server will automatically pick to spawn it in the area most recently unlocked.
 
-## Enemy Spawner ##
+## Spawners ##
+### Enemy Spawner ###
 One of two types of spawner is the Enemy Spawner, a ZDoom MapSpot where enemies can be instantaneously created by the server.  Enemy Spawners in an Area will continually spawn until the next Hackdoor is unlocked.
 
-## PowerUp Spawner ##
+### PowerUp Spawner ###
 The second type of spawner is the PowerUp Spawner, a ZDoom MapSpot where PowerUps can be instantaneously created by the server.  There is only one per Area.
