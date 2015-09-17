@@ -1,5 +1,5 @@
 # Gameplay #
-Hack Doom's objective is simple:  reach the final switch in a level as fast as possible.  However to do so a team is going to need to work together and employ both gaming and hacking skills to succeed.
+Hack Doom's objective is simple:  reach the exit switch in a level as fast as possible.  However to do so a team is going to need to work together and employ both gaming and hacking skills to succeed.
 
 # Team Composition #
 Teams are comprised of 2 - 8 players and broken into two components, __Control__ and __Marines__.
