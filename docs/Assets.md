@@ -36,4 +36,4 @@ Aside from the usual conventions for creating levels a small amount of modificat
 
 ## Usage ##
 When launching the WAD for Hack Doom you'll need to simply specify the *hackdoom.pk3* file as well as the Hack Doom WAD file.
-> zdoom -iwad doom2.wad -file ./levels/hackdoom001.wad ./assets/hackdoom.pk3
+> zdoom -iwad doom2.wad -file ./levels/hackdoom001/hackdoom001.wad ./assets/hackdoom.pk3
