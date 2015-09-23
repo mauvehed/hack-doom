@@ -1,9 +1,13 @@
 # Level Editing #
-To build levels for Hack Doom you're going to need a Doom level editor.  At the moment I recommend [Doom Builder](http://doombuilder.com).  Hack Doom levels make extensive use of Action Code Script ([ACS](http://www.zdoom.org/wiki/ACS)) and as a result the map options created MUST be set to "Doom in Hexen format." If you do not, you will not get the SCRIPTS lump in the resultant WAD file and scripts will not function.
+To build levels for Hack Doom you're going to need a Doom level editor.  At the moment I recommend [Doom Builder](http://doombuilder.com).  Hack Doom levels make extensive use of Action Code Script ([ACS](http://www.zdoom.org/wiki/ACS)) and as a result the map options created MUST be set to either "ZDoom (Doom in UDMF)" or "ZDoom ()Doom in Hexen format)." If you do not, you will not get the SCRIPTS lump in the resultant WAD file and scripts will not function.
 
 When making a level due to the way scripting works you'll need to also create a __LOADACS__ lump as described in the __Assets__ documentation. 
 
-## Tags ##
+# Scripts #
+While most of the scripts in Hack Doom rely on nothing more than appropriate sector, linedef, and thing tags there are unfortunately some functions that simply cannot work without using enumerated scripts.  The following are reserved scripts and how they fit into level editing.  Do NOT issue your scripts with these numbers or it will break your WAD!
+* __1__:  Hackswitch activation script.  When placing a Hackswitch you must set the Action of the Linedef for the Hackswitch to "Script Execute." Supply the script number *1* and the Area number as the first and only argument.
+
+# Tags #
 Tags are critical to the functioning of a Hack Doom level as they form the targets the scripting are going to drive.  The following are the reserved tags:
 * __Hackdoor Tags__: you'll need to assign each Hackdoor a sector ID tag (1-9) and make a note of them for Hack Doom server configuration.
 * __PowerUp Spawner Tags__: in each Hackdoor-accessible area there is __one__ friendly PowerUp spawner.  Its tag is formed as a two digit number with the first being the *Hackdoor Tag* (1-9) and the second being __0__.  This means that the PowerUp spawner in the first Area is *10*, the PowerUp spawner in the third Area is *30*.
