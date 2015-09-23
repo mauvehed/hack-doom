@@ -1,20 +1,20 @@
 # Spawning Monsters #
-Spawning monsters and creating monster spawns is an integral part of Hack Doom.  After all, it's hard to create a challenge for the players without various enemies.
+Spawning monsters and creating monster spawns is an integral part of Hack Doom.  They supply pressure on the Marines to continually move forward, find Secrets, and activate Hackswitches.
 
 ## Level Editing ##
-Spawning monsters relies on having monster spawns in a map.  These are located under *Things -> Properties -> ZDoom -> Map Spot*.  In order to work with the spawnEnemy.acs code an appropriate tag number must be assigned.  The current convention is <*Tag of the Hackdoor for this area, 1-99*><*Two digit sequential enumeration, 01-99*>.  This leaves one hundred possible spawners per Hackdoor-accessible area which should be sufficient for plenty of challenge.
+Spawning monsters relies on having monster spawns in a map.  These are located under *Things -> Properties -> ZDoom -> Map Spot*.  In order to work with the spawnEnemy.acs code an appropriate tag number must be assigned.  The current convention is <*Tag of the Area, 1-9*>*1*.  You may place as many Enemy Spawners as you wish, but be warned that when spawning they will all spawn the chosen enemy type.
 
 ## Script Control ##
 To control monster spawns you'll use the "HackDoom SpawnEnemy" script.  It takes a number of variables:
-* *Spawner*:  tag number of the Hackdoor for this area concatenated with the sequential MapSpot for the area.
+* *Spawner*:  tag number of this Area concatenated with 1.
 * *MonstType*:  spawn number of the monster to spawn (list available on the [ZDoom Wiki](http://www.zdoom.org/wiki/Doom_spawn_numbers))
 * *MonstID*:  normally not used, "999" is an acceptable choice by default.
 
 __Usage Examples__
-> pukename "HackDoom SpawnEnemy" 102 2 999
+> pukename "HackDoom SpawnEnemy" 11 2 999
 
-This spawns a Chainguy at the second MapSpot in the first Hackdoor area with a generic MonstID of 999.
+This spawns a Chainguy at all Enemy Spawners in the first Area with a generic MonstID of 999.
 
-> pukename "HackDoom SpawnEnemy" 5466 2 999
+> pukename "HackDoom SpawnEnemy" 61 2 999
 
-This spawns a Chainguy at the sixty-sixth MapSpot in the fifty-fourth Hackdoor area with a generic MonstID of 999.
+This spawns a Chainguy at all Enemy Spawners in the sixth Area with a generic MonstID of 999.

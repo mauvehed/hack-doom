@@ -56,5 +56,5 @@ One of two types of spawner is the Enemy Spawner, a ZDoom MapSpot where enemies 
 ### PowerUp Spawner ###
 The second type of spawner is the PowerUp Spawner, a ZDoom MapSpot where PowerUps can be instantaneously created by the server.  There is only one per Area, is unlocked by the secret area within that Area, and can only be used once via Edge challenge.
 
-# Secrets #
+## Secrets ##
 Secrets are secret areas used to unlock PowerUp Spawners and Edge challenges.  There is only one per Area and it unlocks locked Edge challenges as well as the Area's PowerUp Spawner.
