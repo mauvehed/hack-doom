@@ -4,7 +4,7 @@
 // The opening text for players
 script "HackDoom Welcome" OPEN 
 {
-    print(s:"Welcome to Hack Doom, prepare yourself!");
+    PrintBold(s:"Welcome to Hack Doom, prepare yourself!");
 }
 
 // This script allows Hackdoors to function.
@@ -15,7 +15,7 @@ script "HackDoom OpenHackdoor" (int Hackdoor) net
 }
 
 // This script allows spawning of enemies at given spawners in a level
-// Spawner:  tag number of the MapSpot (form is: <01-99 for Hackdoor area><01-99 for sequential MapSpot>)
+// Spawner:  tag number of the MapSpot (form is: <1-9 for Hackdoor area>1>)
 // MonstType:  spawn number of the monster to spawn
 // MonstID:  normally not used
 script "HackDoom SpawnEnemy" (int Spawner, int MonstType, int MonstID) net
@@ -24,9 +24,15 @@ script "HackDoom SpawnEnemy" (int Spawner, int MonstType, int MonstID) net
 }
 
 // This script allows spawning of PowerUps at given spawners in a level
-// Spawner:  tag number of the MapSpot (form is: <01-99 for Hackdoor area>00)
+// Spawner:  tag number of the MapSpot (form is: <1-9 for Hackdoor area>0)
 // PowerUpType:  spawn number of the item to spawn
 script "HackDoom SpawnPowerUp" (int Spawner, int PowerUpType) net
 {
 	Thing_SpawnFacing(Spawner, PowerUpType, 0, 999);
+}
+
+// This announces when a Hackswitch has been flipped
+script 1 (int areanum)
+{
+  PrintBold(s:"Area ", d: areanum, s:" Hackswitch activated!");
 }
