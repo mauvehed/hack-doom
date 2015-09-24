@@ -1,5 +1,5 @@
 type = "Doom Builder Map Settings Configuration";
-gameconfig = "ZDoom_DoomHexen.cfg";
+gameconfig = "ZDoom_DoomUDMF.cfg";
 strictpatches = 0;
 
 maps
