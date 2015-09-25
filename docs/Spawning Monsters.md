@@ -8,13 +8,14 @@ Spawning monsters relies on having monster spawns in a map.  These are located u
 To control monster spawns you'll use the "HackDoom SpawnEnemy" script.  It takes a number of variables:
 * *Spawner*:  tag number of this Area concatenated with 1.
 * *MonstType*:  spawn number of the monster to spawn (list available on the [ZDoom Wiki](http://www.zdoom.org/wiki/Doom_spawn_numbers))
-* *MonstID*:  normally not used, "999" is an acceptable choice by default.
+* *Fog*:  whether to set the NoFog value.  Zero by default to show fog on spawn, can be set to one to remove Fog. (optional)
+* *MonstID*:  unique monster identifier, almost never needed.  Defaults to zero if not specified. (optional)
 
 __Usage Examples__
-> pukename "HackDoom SpawnEnemy" 11 2 999
+> pukename "HackDoom SpawnEnemy" 11
 
-This spawns a Chainguy at all Enemy Spawners in the first Area with a generic MonstID of 999.
+This spawns a Chainguy at all Enemy Spawners in the first Area with teleport fog and MonsterID 0.
 
-> pukename "HackDoom SpawnEnemy" 61 2 999
+> pukename "HackDoom SpawnEnemy" 61 1 999
 
-This spawns a Chainguy at all Enemy Spawners in the sixth Area with a generic MonstID of 999.
+This spawns a Chainguy at all Enemy Spawners in the sixth Area with no teleport fog and MonsterID 999.
