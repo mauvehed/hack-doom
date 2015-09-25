@@ -9,7 +9,7 @@ Hacklifts __must__ be tagged with a non-reserved sector tag (01-99).
 
 ## Script Control ##
 To control opening Hackdoors you'll use the "HackDoom RaiseHacklift" or "HackDoom LowerHacklift" scripts.  They take two variables:
-* *Tag*:  tag number of the Hacklift to operate. (required)
+* *Hacklift*:  tag number of the Hacklift to operate. (required)
 * *Wait*:  the number of frames (30 = 1 second) to wait before resetting to the previous state.  If unspecified, it will default to 90 or 3 seconds.  __WARNING:__ if you set this to 0 the lift will *REMAIN* stuck in that position! (optional)
 
 __Usage Examples__
