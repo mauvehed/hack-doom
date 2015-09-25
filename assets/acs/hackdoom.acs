@@ -35,24 +35,24 @@ script "HackDoom SpawnPowerUp" (int Spawner, int PowerUpType) net
 script "HackDoom LowerHacklift" (int Hacklift, int Wait) net
 {
 	// Set default Wait to three seconds if one is not specified
-    if (!Wait)
+	if (!Wait)
 	{
 		Wait = 90;
 	}
 	
-	Plat_DownWaitUpStay(HackLift, 10, Wait);
+	Plat_DownWaitUpStay(Hacklift, 10, Wait);
 }
 
 // This script allows raising Hacklifts
 script "HackDoom RaiseHacklift" (int Hacklift, int Wait) net
 {
 	// Set default Wait to three seconds if one is not specified
-    if (!Wait)
+	if (!Wait)
 	{
 		Wait = 90;
 	}
 	
-	Plat_UpWaitDownStay(HackLift, 10, Wait);
+	Plat_UpWaitDownStay(Hacklift, 10, Wait);
 }
 
 // This announces when a Hackswitch has been flipped
