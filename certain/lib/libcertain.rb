@@ -4,7 +4,8 @@ require 'pty'
 class GameServer
   def initialize(iwad, assets, wads)
     @zdoom = `which zdoom`.strip!
-    @args = "-iwad #{iwad} -file #{assets.gsub(/,/, ' ')} #{wads.gsub(/,/, ' ')}"
+    #@args = "-iwad #{iwad} -file #{assets.gsub(/,/, ' ')} #{wads.gsub(/,/, ' ')}"
+    @args = "-iwad #{iwad} -file #{assets.join(' ')} #{wads.join(' ')}"
   end
 
   def where?
