@@ -1,3 +1,5 @@
+require 'pty'
+
 # GameServer defines a running game server
 class GameServer
   def initialize(iwad, assets, wads)
@@ -10,7 +12,17 @@ class GameServer
   end
 
   def start
-    `#{@zdoom} #{@args}`
+    begin
+      PTY.spawn("#{@zdoom} #{@args}") do |stdout, stdin, pid|
+        begin
+          stdout.each { |line| print line }
+        rescue Errno::EIO
+          puts "Errno::EIO error, likely input has failed"
+        end
+      end
+    rescue PTY::ChildExited
+      puts "ZDoom server has stopped"
+    end
   end
 
   def stop
