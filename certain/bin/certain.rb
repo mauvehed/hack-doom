@@ -39,3 +39,6 @@ end
 
 # Initialize GameServer object
 gameServer = GameServer.new(options[:iwad], options[:assets], options[:wadfiles])
+
+# Run the server
+gameServer.start
