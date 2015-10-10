@@ -9,7 +9,7 @@
 require_relative "../lib/libcertain.rb"
 require "optparse"
 
-$VERBOSE = false
+$verbose = false
 
 # Default argument values
 options = {:websocketport => '5238', :wadfiles => [], :assets => ['hackdoom.pk3'], :iwad => "doom2.wad", :verbose => 'false'}
@@ -29,15 +29,15 @@ parser.parse!
 puts "Certain Doom launching..."
 
 # Check for verbosity and dump startup options
-$VERBOSE = options[:verbose]
-if $VERBOSE == true then
+$verbose = options[:verbose]
+if $verbose == true then
   puts "Websocket port:  #{options[:websocketport]}"
   puts "IWAD:  #{options[:iwad]}"
   puts "WADs:\n"
     unless options[:wadfiles].empty? then options[:wadfiles].each { |i| puts " -#{i}" } end
   puts "Assets:\n"
     unless options[:assets].empty? then options[:assets].each { |i| puts " -#{i}" } end
-  puts "Verbose?  #{$VERBOSE}"
+  puts "Verbose?  #{$verbose}"
 end
 
 # Initialize GameServer object

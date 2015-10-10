@@ -18,7 +18,7 @@ class GameServer
 
   def start
     command = "#{@zdoom} #{@args} -coop"
-    if $VERBOSE then puts "Launching with command:  \"#{command}\"" end
+    if $verbose then puts "Launching with command:  \"#{command}\"" end
     `#{command}`
   end
 
