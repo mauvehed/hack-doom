@@ -1,7 +1,10 @@
 require 'pty'
+require 'Celluloid'
 
 # GameServer defines a running game server
 class GameServer
+  include Celluloid
+
   def initialize(iwad, assets, wads)
     @zdoom = `which zdoom`.strip!
     @args = "-iwad #{iwad} -file #{assets.join(' ')} #{wads.join(' ')}"
@@ -14,17 +17,7 @@ class GameServer
   end
 
   def start
-    begin
-      PTY.spawn("#{@zdoom} #{@args}") do |stdout, stdin, pid|
-        begin
-          stdout.each { |line| print line }
-        rescue Errno::EIO
-          puts "Errno::EIO error, likely input has failed"
-        end
-      end
-    rescue PTY::ChildExited
-      puts "ZDoom server has stopped"
-    end
+    `#{@zdoom} #{@args}`
   end
 
   def stop

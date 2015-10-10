@@ -41,4 +41,6 @@ end
 gameServer = GameServer.new(options[:iwad], options[:assets], options[:wadfiles])
 
 # Run the server
-gameServer.start
+gameServer.async.start
+
+loop do puts "Winning!" end
