@@ -10,6 +10,7 @@ require_relative "../lib/libcertain.rb"
 require "optparse"
 
 $verbose = false
+io = IO.new(1)
 
 # Default argument values
 options = {:websocketport => '5238', :wadfiles => [], :assets => ['hackdoom.pk3'], :iwad => "doom2.wad", :verbose => 'false'}
@@ -46,4 +47,4 @@ gameServer = GameServer.new(options[:iwad], options[:assets], options[:wadfiles]
 # Run the server
 gameServer.async.start
 
-loop do sleep 10 ; puts "pukename \"HackDoom Welcome\"" end
+loop do sleep 10 ; io.puts "pukename \"HackDoom Welcome\"" end
