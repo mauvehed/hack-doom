@@ -4,4 +4,4 @@ filename: hackdoom001.wad
 levels:
   'HACK01'
     areas:     6
-    hacklifts: [ 200, 400 ]
+    hacklifts: [ 200, 300, 400 ]
