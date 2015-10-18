@@ -5,9 +5,9 @@ require 'Celluloid'
 class GameServer
   include Celluloid
 
-  def initialize(iwad, assets, wads)
+  def initialize(iwad, assets, wads, marines)
     @zdoom = `which zdoom`.strip!
-    @args = "-iwad #{iwad} -file #{assets.join(' ')} #{wads.join(' ')}"
+    @args = "-iwad #{iwad} -host #{marines} -coop -file #{assets.join(' ')} #{wads.join(' ')}"
     @extCmd = ExternalCommand.new
     @gamCmd = GameCommand.new
   end
@@ -17,7 +17,7 @@ class GameServer
   end
 
   def start
-    command = "#{@zdoom} -coop #{@args}"
+    command = "#{@zdoom} #{@args}"
     if $verbose then puts "Launching with command:  \"#{command}\"" end
     IO.popen("#{command}") { |io| while (line = io.gets) do puts line end }
   end
