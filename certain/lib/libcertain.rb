@@ -17,9 +17,9 @@ class GameServer
   end
 
   def start
-    command = "#{@zdoom} #{@args} -coop"
+    command = "#{@zdoom} -coop #{@args}"
     if $verbose then puts "Launching with command:  \"#{command}\"" end
-    `#{command}`
+    IO.popen("#{command}") { |io| while (line = io.gets) do puts line end }
   end
 
   def stop
