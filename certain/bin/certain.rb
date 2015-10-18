@@ -22,15 +22,13 @@ parser = OptionParser.new do |o|
   o.on("--assets D,E,F[...]", Array, "Asset files to load in Certain") { |files| options[:assets] = files }
   o.on("--iwad IWAD", "IWAD file (doom2.wad, doom.wad, etc") { |iwad| options[:iwad] = iwad }
   o.on("--marines NUM", "Number of Marines") { |i| options[:marines] = i }
-  o.on( '-v', '--verbose', 'Output debugging information' ) { options[:verbose] = true}
+  o.on( '-v', '--verbose', 'Output debugging information' ) { $verbose = true}
   o.on('-h') { puts o; exit }
 end
 parser.parse!
 
 puts "Certain Doom launching..."
 
-# Check for verbosity and dump startup options
-$verbose = options[:verbose]
 if $verbose == true then
   puts "Websocket port:  #{options[:websocketport]}"
   puts "IWAD:  #{options[:iwad]}"
