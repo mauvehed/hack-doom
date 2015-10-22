@@ -6,24 +6,25 @@ class GameServer
   include Celluloid
 
   def initialize(iwad, assets, wads, marines)
-    @zdoom = `which zdoom`.strip!
+    @doombin = `which zandronum`.strip!
     @args = "-iwad #{iwad} -host #{marines} -coop -file #{assets.join(' ')} #{wads.join(' ')}"
     @extCmd = ExternalCommand.new
     @gamCmd = GameCommand.new
   end
 
   def where?
-    @zdoom
+    @doombin
   end
 
   def start
-    command = "#{@zdoom} #{@args}"
+    command = "#{@doombin} #{@args}"
     if $verbose then puts "Launching with command:  \"#{command}\"" end
-    IO.popen("#{command}") { |io| while (line = io.gets) do puts line end }
+    #IO.popen("#{command}") { |io| while (line = io.gets) do puts line end }
+    `#{command}`
   end
 
   def stop
-    pid = `ps aux | grep #{@zdoom}`
+    pid = `ps aux | grep #{@doombin}`
     `kill #{pid}`
   end
 end
