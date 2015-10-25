@@ -10,6 +10,7 @@ require_relative "../lib/libcertain.rb"
 require "optparse"
 
 $verbose = false
+$stdout.sync = true
 
 # Default argument values
 options = {:websocketport => '5238', :wadfiles => [], :assets => ['hackdoom.pk3'], :iwad => "doom2.wad", :verbose => 'false'}
