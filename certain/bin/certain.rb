@@ -46,4 +46,4 @@ gameServer = GameServer.new(options[:iwad], options[:assets], options[:wadfiles]
 # Run the server
 gameServer.async.start
 
-loop do sleep 10 ; io.puts "pukename \"HackDoom Welcome\"" end
+loop do sleep 10 ; $stdout.puts "pukename \"HackDoom Welcome\"" end
