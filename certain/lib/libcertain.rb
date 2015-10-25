@@ -1,5 +1,5 @@
 require 'pty'
-require 'Celluloid'
+require 'celluloid/current'
 
 # GameServer defines a running game server
 class GameServer
