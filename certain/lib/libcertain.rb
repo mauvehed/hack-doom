@@ -20,7 +20,7 @@ class GameServer
     command = "#{@doombin} #{@args}"
     if $verbose then puts "Launching with command:  \"#{command}\"" end
     #IO.popen("#{command}") { |io| while (line = io.gets) do puts line end }
-    `#{command}`
+    $stdout.puts `#{command}`
   end
 
   def stop
