@@ -70,5 +70,6 @@ script "HackDoom RaiseHacklift" (int Hacklift, int Wait) net
 // This announces when a Hackswitch has been flipped
 script 1 (int areanum)
 {
-  PrintBold(s:"Area ", d: areanum, s:" Hackswitch activated!");
+  // PrintBold(s:"Area ", d: areanum, s:" Hackswitch activated!");
+  Log(s:"Area ", d: areanum, s:" Hackswitch activated!");
 }
