@@ -4,7 +4,7 @@
 // The opening text for players
 script "HackDoom Welcome" OPEN 
 {
-    PrintBold(s:"Welcome to Hack Doom, prepare yourself!");
+    Log(s:"Welcome to Hack Doom, prepare yourself!");
 }
 
 // This script allows Hackdoors to function.
