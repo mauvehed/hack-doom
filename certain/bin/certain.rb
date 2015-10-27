@@ -8,6 +8,7 @@
 ###########################################################
 require_relative "../lib/libcertain.rb"
 require "optparse"
+require "open3"
 
 $verbose = false
 $stdout.sync = true
