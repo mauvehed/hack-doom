@@ -1,5 +1,6 @@
 require 'pty'
 require 'celluloid/current'
+require 'open3'
 
 # GameServer defines a running game server
 class GameServer
@@ -19,8 +20,7 @@ class GameServer
   def start
     command = "#{@doombin} #{@args}"
     if $verbose then puts "Launching with command:  \"#{command}\"" end
-    #IO.popen("#{command}") { |io| while (line = io.gets) do puts line end }
-    $stdout.puts `#{command}`
+    Open3.pipeline("#{command}")
   end
 
   def stop
