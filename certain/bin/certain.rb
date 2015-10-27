@@ -45,4 +45,4 @@ end
 gameServer = GameServer.new(options[:iwad], options[:assets], options[:wadfiles], options[:marines])
 
 # Run the server
-gameServer.async.start
+gameServer.start

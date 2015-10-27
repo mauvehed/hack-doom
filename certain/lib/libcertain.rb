@@ -1,11 +1,8 @@
 require 'pty'
-require 'celluloid/current'
 require 'open3'
 
 # GameServer defines a running game server
 class GameServer
-  include Celluloid
-
   def initialize(iwad, assets, wads, marines)
     @doombin = `which zandronum`.strip!
     @args = "-iwad #{iwad} -host #{marines} -coop -file #{assets.join(' ')} #{wads.join(' ')}"
@@ -20,7 +17,19 @@ class GameServer
   def start
     command = "#{@doombin} #{@args}"
     if $verbose then puts "Launching with command:  \"#{command}\"" end
-    Open3.pipeline("#{command}")
+    i, o = Open3.popen2 "#{command}"
+    
+    Thread.new do
+      ARGF.each_line do |line|
+        i.puts line if line.match(/pukename.*/)
+      end
+    
+      i.close
+    end
+
+    while res = o.gets
+      puts res
+    end
   end
 
   def stop
