@@ -41,18 +41,32 @@ end
 # GameEvent is the base class that defines communication to and from a game in progress
 class GameEvent
   def intialize
+    # List of valid commands
+    @commands = []
   end
+
+  def command(request)
+  end
+
+  attr_reader :commands
 end
 
 # GameCommand is for events originating within a game
 class GameCommand < GameEvent
   def initialize
+    super
   end
 end
 
 # ExternalCommand is for events originating outside the game
 class ExternalCommand < GameEvent
   def initialize
+    super
+    @commands += [ 'OpenHackdoor',
+                   'SpawnEnemy',
+                   'SpawnPowerUp',
+                   'LowerHacklift',
+                   'RaiseHacklift' ]
   end
 
   # Opens the Hackdoor
