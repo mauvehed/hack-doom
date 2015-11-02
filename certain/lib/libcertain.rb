@@ -45,7 +45,8 @@ class GameEvent
     @commands = []
   end
 
-  def command(request)
+  # Translate the requested text into a command
+  def command (request)
   end
 
   attr_reader :commands
@@ -62,35 +63,74 @@ end
 class ExternalCommand < GameEvent
   def initialize
     super
-    @commands += [ 'OpenHackdoor',
-                   'SpawnEnemy',
-                   'SpawnPowerUp',
-                   'LowerHacklift',
-                   'RaiseHacklift' ]
+    @commands += [ 'openhackdoor',
+                   'spawnenemy',
+                   'spawnpowerup',
+                   'lowerhacklift',
+                   'raisehacklift' ]
+  end
+
+  # Translate the requested text into a command
+  def command (request)
+    tokens = request.split(/\s+/)
+
+    # Check for valid command
+    raise ArgumentError, "Not a command" unless tokens != nil
+    raise ArgumentError, "Unknown command" unless @commands.include? tokens[0]
+
+    # Determine in-game command to run with arguments
+    case tokens[0]
+      when "openhackdoor"
+        raise ArgumentError, 'Not enough arguments' unless tokens.size >= 2
+        ExternalCommand.openhackdoor(tokens[1])
+
+      when "spawnenemy"
+        raise ArgumentError, 'Not enough arguments' unless tokens.size >= 3
+        if tokens[3] == nil then tokens[3] = 0 end
+        if tokens[4] == nil then tokens[4] = 0 end
+        ExternalCommand.spawnenemy(tokens[1], tokens[2], tokens[3], tokens[4])
+
+      when "spawnpowerup"
+        raise ArgumentError, 'Not enough arguments' unless tokens.size >= 3
+        ExternalCommand.spawnpowerup(tokens[1], tokens[2])
+
+      when "lowerhacklift"
+        raise ArgumentError, 'Not enough arguments' unless tokens.size >= 2
+        if tokens[2] == nil then tokens[2] = 90 end
+        ExternalCommand.lowerhacklift(tokens[1], tokens[2])
+
+      when "raisehacklift"
+        raise ArgumentError, 'Not enough arguments' unless tokens.size >= 2
+        if tokens[2] == nil then tokens[2] = 90 end
+        ExternalCommand.raisehacklift(tokens[1], tokens[2])
+
+      else
+        raise "Unknown command"
+    end
   end
 
   # Opens the Hackdoor
-  def openHackdoor (door)
+  def openhackdoor (door)
     puts "pukename \"HackDoom OpenHackdoor\" #{door}"
   end
 
   # Spawns enemies
-  def spawnEnemy (spawner, type, fog = 0, monstid = 0)
+  def spawnenemy (spawner, type, fog = 0, monstid = 0)
     puts "pukename \"HackDoom SpawnEnemy\" #{spawner} #{type} #{fog} #{monstid}"
   end
 
   # Spawns PowerUps
-  def spawnPowerUp (spawner, type)
+  def spawnpowerup (spawner, type)
     puts "pukename \"HackDoom SpawnPowerUp\" #{spawner} #{type})"
   end
 
   # Lowers a Hacklift
-  def lowerHacklift(lift, wait = 90)
+  def lowerhacklift(lift, wait = 90)
     puts "pukename \"HackDoom LowerHacklift\" #{lift} #{wait}"
   end
 
   # Raises a Hacklift
-  def raiseHacklift(lift, wait = 90)
+  def raisehacklift(lift, wait = 90)
     puts "pukename \"HackDoom RaiseHacklift\" #{lift} #{wait}"
   end
 end
