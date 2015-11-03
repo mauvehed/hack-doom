@@ -18,10 +18,12 @@ class GameServer
     command = "#{@doombin} #{@args}"
     if $verbose then puts "Launching with command:  \"#{command}\"" end
     i, o = Open3.popen2 "#{command}"
+    gc = GameCommand.new
+    ec = ExternalCommand.new
     
     Thread.new do
       ARGF.each_line do |line|
-        i.puts line if line.match(/pukename.*/)
+        i.puts line if ec.command(line)
       end
     
       i.close
@@ -42,11 +44,7 @@ end
 class GameEvent
   def intialize
     # List of valid commands
-    @commands = []
-  end
-
-  # Translate the requested text into a command
-  def command (request)
+    @commands = Array.new
   end
 
   attr_reader :commands
@@ -55,54 +53,60 @@ end
 # GameCommand is for events originating within a game
 class GameCommand < GameEvent
   def initialize
-    super
+    # List of valid commands
+    @commands = [ 'hackswitch',
+                  'secret' ]
+  end
+
+  # Translate the requested text into a command
+  def command (request)
+    tokens = request.split(/\s+/)
+    raise ArgumentError, "Not a command" if tokens.empty?
+    raise ArgumentError, "Unknown command" unless @commands.include? tokens[0]
   end
 end
 
 # ExternalCommand is for events originating outside the game
 class ExternalCommand < GameEvent
   def initialize
-    super
-    @commands += [ 'openhackdoor',
-                   'spawnenemy',
-                   'spawnpowerup',
-                   'lowerhacklift',
-                   'raisehacklift' ]
+    @commands = [ 'openhackdoor',
+                  'spawnenemy',
+                  'spawnpowerup',
+                  'lowerhacklift',
+                  'raisehacklift' ]
   end
 
   # Translate the requested text into a command
   def command (request)
     tokens = request.split(/\s+/)
-
-    # Check for valid command
-    raise ArgumentError, "Not a command" unless tokens != nil
+    raise ArgumentError, "Not a command" if tokens.empty?
     raise ArgumentError, "Unknown command" unless @commands.include? tokens[0]
 
     # Determine in-game command to run with arguments
     case tokens[0]
       when "openhackdoor"
         raise ArgumentError, 'Not enough arguments' unless tokens.size >= 2
-        ExternalCommand.openhackdoor(tokens[1])
+        openhackdoor(tokens[1])
 
       when "spawnenemy"
         raise ArgumentError, 'Not enough arguments' unless tokens.size >= 3
         if tokens[3] == nil then tokens[3] = 0 end
         if tokens[4] == nil then tokens[4] = 0 end
-        ExternalCommand.spawnenemy(tokens[1], tokens[2], tokens[3], tokens[4])
+        spawnenemy(tokens[1], tokens[2], tokens[3], tokens[4])
 
       when "spawnpowerup"
         raise ArgumentError, 'Not enough arguments' unless tokens.size >= 3
-        ExternalCommand.spawnpowerup(tokens[1], tokens[2])
+        spawnpowerup(tokens[1], tokens[2])
 
       when "lowerhacklift"
         raise ArgumentError, 'Not enough arguments' unless tokens.size >= 2
         if tokens[2] == nil then tokens[2] = 90 end
-        ExternalCommand.lowerhacklift(tokens[1], tokens[2])
+        lowerhacklift(tokens[1], tokens[2])
 
       when "raisehacklift"
         raise ArgumentError, 'Not enough arguments' unless tokens.size >= 2
         if tokens[2] == nil then tokens[2] = 90 end
-        ExternalCommand.raisehacklift(tokens[1], tokens[2])
+        raisehacklift(tokens[1], tokens[2])
 
       else
         raise "Unknown command"
