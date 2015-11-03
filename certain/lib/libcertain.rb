@@ -21,8 +21,14 @@ class GameServer
     gc = GameCommand.new
     ec = ExternalCommand.new
     
+    # Begin command loop
     Thread.new do
       ARGF.each_line do |line|
+        # Check if server requested to close
+        if line =~ /quit/ then
+          stop
+          exit
+        end
         i.puts ec.command(line)
       end
     
@@ -35,8 +41,7 @@ class GameServer
   end
 
   def stop
-    pid = `ps aux | grep #{@doombin}`
-    `kill #{pid}`
+    `ps aux | grep #{@doombin} | grep -v grep | awk '{print $2}' | xargs kill`
   end
 end
 
