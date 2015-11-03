@@ -24,11 +24,7 @@ class GameServer
     # Begin command loop
     Thread.new do
       ARGF.each_line do |line|
-        # Check if server requested to close
-        if line =~ /quit/ then
-          stop
-          exit
-        end
+        stop && exit if line =~ /quit/
         i.puts ec.command(line)
       end
     
