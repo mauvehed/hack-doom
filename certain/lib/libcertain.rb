@@ -117,10 +117,10 @@ class ExternalCommand < GameEvent
 
     # Run the command
     if failure
-      puts "echo Not enough arguments"
+      return "echo Not enough arguments"
     else
       transCommand = request.shift
-      puts "pukename \"HackDoom #{@commands[transCommand]}\" #{request.join(" ")}"
+      return "pukename \"HackDoom #{@commands[transCommand]}\" #{request.join(" ")}"
     end
   end
 end
