@@ -81,8 +81,7 @@ class ExternalCommand < GameEvent
                   'spawnenemy'    => 'SpawnEnemy',
                   'spawnpowerup'  => 'SpawnPowerUp',
                   'lowerhacklift' => 'LowerHacklift',
-                  'raisehacklift' => 'RaiseHacklift',
-                  'changemap'     => 'map' }
+                  'raisehacklift' => 'RaiseHacklift' }
   end
 
   # Translate the requested text into a command
@@ -109,11 +108,6 @@ class ExternalCommand < GameEvent
       when "raisehacklift"
         failure = true if request.size < 2
         if request[2] == nil then request[2] = 90 end
-
-      when "changemap"
-        failure = true if request.size < 2
-        puts "map #{request[1]}" unless failure
-        return
 
       else
         raise ArgumentError, "Unknown command"
