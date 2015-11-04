@@ -28,7 +28,7 @@ class GameServer
         request = line.split(/\s+/)
         if request.empty?
           puts "No command"
-        elsif ec.commands.has_key? request[0] == false
+        elsif !ec.commands.has_key? request[0]
           puts "Command not recognized"
         else
           i.puts ec.command(request)
