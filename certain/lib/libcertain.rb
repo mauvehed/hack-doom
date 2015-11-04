@@ -3,9 +3,9 @@ require 'open3'
 
 # GameServer defines a running game server
 class GameServer
-  def initialize(iwad, assets, wads, marines)
+  def initialize(iwad, assets, wads, marines, level)
     @doombin = `which zandronum`.strip!
-    @args = "-iwad #{iwad} -host #{marines} -coop -file #{assets.join(' ')} #{wads.join(' ')}"
+    @args = "-iwad #{iwad} -host #{marines} -coop -file #{assets.join(' ')} #{wads.join(' ')} +map #{level}"
     @extCmd = ExternalCommand.new
     @gamCmd = GameCommand.new
   end
@@ -81,7 +81,8 @@ class ExternalCommand < GameEvent
                   'spawnenemy'    => 'SpawnEnemy',
                   'spawnpowerup'  => 'SpawnPowerUp',
                   'lowerhacklift' => 'LowerHacklift',
-                  'raisehacklift' => 'RaiseHacklift' }
+                  'raisehacklift' => 'RaiseHacklift',
+                  'changemap'     => 'map' }
   end
 
   # Translate the requested text into a command
@@ -108,6 +109,11 @@ class ExternalCommand < GameEvent
       when "raisehacklift"
         failure = true if request.size < 2
         if request[2] == nil then request[2] = 90 end
+
+      when "changemap"
+        failure = true if request.size < 2
+        puts "map #{request[1]}" unless failure
+        return
 
       else
         raise ArgumentError, "Unknown command"

@@ -13,7 +13,7 @@ $verbose = false
 $stdout.sync = true
 
 # Default argument values
-options = {:websocketport => '5238', :wadfiles => [], :assets => ['hackdoom.pk3'], :iwad => "doom2.wad", :verbose => 'false'}
+options = {:websocketport => '5238', :wadfiles => [], :assets => ['hackdoom.pk3'], :iwad => "doom2.wad", :level => "", :verbose => 'false'}
 
 # Check number of arguments and for if the user requests help
 parser = OptionParser.new do |o|
@@ -21,8 +21,9 @@ parser = OptionParser.new do |o|
   o.on("--websocketport PORT", "Port number to present via websocket") { |i| options[:websocketport] = i }
   o.on("--wadfiles A,B,C[...]", Array, "WAD files to run the server with") { |wads| options[:wadfiles] = wads }
   o.on("--assets D,E,F[...]", Array, "Asset files to load in Certain") { |files| options[:assets] = files }
-  o.on("--iwad IWAD", "IWAD file (doom2.wad, doom.wad, etc") { |iwad| options[:iwad] = iwad }
+  o.on("--iwad IWAD", "IWAD file (doom2.wad, doom.wad, etc)") { |iwad| options[:iwad] = iwad }
   o.on("--marines NUM", "Number of Marines") { |i| options[:marines] = i }
+  o.on("--level LEVEL", "Level to load") { |level| options[:level] = level }
   o.on( '-v', '--verbose', 'Output debugging information' ) { $verbose = true}
   o.on('-h') { puts o; exit }
 end
@@ -38,11 +39,12 @@ if $verbose == true then
   puts "Assets:\n"
     unless options[:assets].empty? then options[:assets].each { |i| puts " -#{i}" } end
   puts "Marines:  #{options[:marines]}"
+  puts "Level:  #{options[:level]}"
   puts "Verbose?  #{$verbose}"
 end
 
 # Initialize GameServer object
-gameServer = GameServer.new(options[:iwad], options[:assets], options[:wadfiles], options[:marines])
+gameServer = GameServer.new(options[:iwad], options[:assets], options[:wadfiles], options[:marines], options[:level])
 
 # Run the server
 gameServer.start
