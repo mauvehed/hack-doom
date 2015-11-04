@@ -28,6 +28,8 @@ class GameServer
         request = line.split(/\s+/)
         if request.empty?
           puts "No command"
+        elsif request[0] =~ /map/
+          i.puts "map #{request[1]}"
         elsif !ec.commands.has_key? request[0]
           puts "Command not recognized"
         else
