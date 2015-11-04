@@ -25,7 +25,14 @@ class GameServer
     Thread.new do
       ARGF.each_line do |line|
         stop && exit if line =~ /quit/
-        i.puts ec.command(line)
+        request = line.split(/\s+/)
+        if request.empty?
+          puts "No command"
+        elsif ec.commands.has_key? request[0] == false
+          puts "Command not recognized"
+        else
+          i.puts ec.command(request)
+        end
       end
     
       i.close
@@ -79,37 +86,34 @@ class ExternalCommand < GameEvent
 
   # Translate the requested text into a command
   def command (request)
-    tokens = request.split(/\s+/)
-    raise ArgumentError, "Not a command" if tokens.empty?
-    raise ArgumentError, "Unknown command" unless @commands.has_key? tokens[0]
-
     # Determine in-game command to run with arguments
-    case tokens[0]
+    case request[0]
       when "openhackdoor"
-        raise ArgumentError, 'Not enough arguments' unless tokens.size >= 2
+        raise ArgumentError, 'Not enough arguments' unless request.size >= 2
 
       when "spawnenemy"
-        raise ArgumentError, 'Not enough arguments' unless tokens.size >= 3
-        if tokens[3] == nil then tokens[3] = 0 end
-        if tokens[4] == nil then tokens[4] = 0 end
+        raise ArgumentError, 'Not enough arguments' unless request.size >= 3
+        if request[3] == nil then request[3] = 0 end
+        if request[4] == nil then request[4] = 0 end
 
       when "spawnpowerup"
-        raise ArgumentError, 'Not enough arguments' unless tokens.size >= 3
+        raise ArgumentError, 'Not enough arguments' unless request.size >= 3
 
       when "lowerhacklift"
-        raise ArgumentError, 'Not enough arguments' unless tokens.size >= 2
-        if tokens[2] == nil then tokens[2] = 90 end
+        raise ArgumentError, 'Not enough arguments' unless request.size >= 2
+        if request[2] == nil then request[2] = 90 end
 
       when "raisehacklift"
-        raise ArgumentError, 'Not enough arguments' unless tokens.size >= 2
-        if tokens[2] == nil then tokens[2] = 90 end
+        raise ArgumentError, 'Not enough arguments' unless request.size >= 2
+        if request[2] == nil then request[2] = 90 end
 
       else
-        raise ArgumentError, "Unknown command"
+        puts "echo Unknown command:  #{request[0]}"
+        return
     end
 
     # Run the command
-    transCommand = tokens.shift
-    puts "pukename \"HackDoom #{@commands[transCommand]}\" #{tokens.join(" ")}"
+    transCommand = request.shift
+    puts "pukename \"HackDoom #{@commands[transCommand]}\" #{request.join(" ")}"
   end
 end
