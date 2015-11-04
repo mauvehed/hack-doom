@@ -86,34 +86,39 @@ class ExternalCommand < GameEvent
 
   # Translate the requested text into a command
   def command (request)
+    failure = false
+
     # Determine in-game command to run with arguments
     case request[0]
       when "openhackdoor"
-        raise ArgumentError, 'Not enough arguments' unless request.size >= 2
+        failure = true if request.size < 2
 
       when "spawnenemy"
-        raise ArgumentError, 'Not enough arguments' unless request.size >= 3
+        failure = true if request.size < 3
         if request[3] == nil then request[3] = 0 end
         if request[4] == nil then request[4] = 0 end
 
       when "spawnpowerup"
-        raise ArgumentError, 'Not enough arguments' unless request.size >= 3
+        failure = true if request.size < 3
 
       when "lowerhacklift"
-        raise ArgumentError, 'Not enough arguments' unless request.size >= 2
+        failure = true if request.size < 2
         if request[2] == nil then request[2] = 90 end
 
       when "raisehacklift"
-        raise ArgumentError, 'Not enough arguments' unless request.size >= 2
+        failure = true if request.size < 2
         if request[2] == nil then request[2] = 90 end
 
       else
-        puts "echo Unknown command:  #{request[0]}"
-        return
+        raise ArgumentError, "Unknown command"
     end
 
     # Run the command
-    transCommand = request.shift
-    puts "pukename \"HackDoom #{@commands[transCommand]}\" #{request.join(" ")}"
+    if failure
+      puts "echo Not enough arguments"
+    else
+      transCommand = request.shift
+      puts "pukename \"HackDoom #{@commands[transCommand]}\" #{request.join(" ")}"
+    end
   end
 end
