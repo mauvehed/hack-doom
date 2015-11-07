@@ -68,6 +68,26 @@ script "HackDoom RaiseHacklift" (int Hacklift, int Wait) net
 	Plat_UpWaitDownStay(Hacklift, 10, Wait);
 }
 
+// This announces when a Secret is found
+script "HackDoom CheckSecrets" OPEN
+{
+  int oldsecretcount;
+  int newsecretcount;
+
+  oldsecretcount = GetLevelInfo(LEVELINFO_FOUND_SECRETS);
+
+  while (newsecretcount <= oldsecretcount)
+  {
+    delay(2);
+    newsecretcount = GetLevelInfo(LEVELINFO_FOUND_SECRETS);
+  }
+
+  PrintBold(s:"Secret found!");
+  Log(s:"Secret found!");
+
+  restart;
+}
+
 // This announces when a Hackswitch has been flipped
 script 1 (int areanum)
 {
