@@ -48,7 +48,7 @@ if $verbose == true then
 end
 
 # Initialize GameServer object
-gameServer = GameServer.new(options[:iwad], options[:assets], options[:wadfiles], options[:marines], options[:level])
+gameServer = GameServer.new(options[:iwad], options[:assets], options[:wadfiles], options[:marines], options[:level], options[:websocketport])
 
 # Run the server
 gameServer.start

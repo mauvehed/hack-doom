@@ -3,8 +3,10 @@ require 'open3'
 
 # GameServer defines a running game server
 class GameServer
-  def initialize(iwad, assets, wads, marines, level)
+  def initialize(iwad, assets, wads, marines, level, port)
     @doombin = `which zandronum`.strip!
+    @wsbin = `which websocketd`.strip!
+    @wsport = port
     @args = "-iwad #{iwad} -host #{marines} -coop -file #{assets.join(' ')} #{wads.join(' ')} +map #{level}"
     @extCmd = ExternalCommand.new
     @gamCmd = GameCommand.new
@@ -15,7 +17,13 @@ class GameServer
   end
 
   def start
-    command = "#{@doombin} #{@args}"
+    # Check for if the user wants to start a websocket
+    if $nowebsocket 
+      command = "#{@doombin} #{@args}" 
+    elsif
+      command = "#{@wsbin} --port=#{@wsport} #{@doombin} #{@args}" 
+    end
+
     if $verbose then puts "Launching with command:  \"#{command}\"" end
     i, o = Open3.popen2 "#{command}"
     gc = GameCommand.new
