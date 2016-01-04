@@ -9,7 +9,9 @@
 require_relative "../lib/libcertain.rb"
 require "optparse"
 
+# Global variables
 $verbose = false
+$nowebsocket = false
 $stdout.sync = true
 
 # Default argument values
@@ -25,6 +27,7 @@ parser = OptionParser.new do |o|
   o.on("--marines NUM", "Number of Marines") { |i| options[:marines] = i }
   o.on("--level LEVEL", "Level to load") { |level| options[:level] = level }
   o.on( '-v', '--verbose', 'Output debugging information' ) { $verbose = true}
+  o.on( '-n', '--nowebsocket', 'Do not start with websocketd.' ) { $nowebsocket = true}
   o.on('-h') { puts o; exit }
 end
 parser.parse!
@@ -40,6 +43,7 @@ if $verbose == true then
     unless options[:assets].empty? then options[:assets].each { |i| puts " -#{i}" } end
   puts "Marines:  #{options[:marines]}"
   puts "Level:  #{options[:level]}"
+  puts "Websocket?  #{$nowebocket}"
   puts "Verbose?  #{$verbose}"
 end
 
