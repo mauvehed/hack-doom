@@ -8,3 +8,9 @@ Inside this repo you'll find everything you need to get started with Hack Doom. 
 * __certain:__ contains the Zandronum wrapper Certain which allows control of a Zandronum game server via websocket.
 * __gloom:__ contains the Rails-based scoreboard Gloom which Hack Doom uses to interact with Certain.
 * __levels:__ submitted levels for Hack Doom.  These all have to follow the conventions in the documentation but are otherwise ready to play.
+
+# Requirements #
+* [Zandronum] (https://zandronum.com/) 3.0+
+* Ruby 2.0+
+* [Websocketd] (https://github.com/joewalnes/websocketd)
+* Doom WAD (preferably doom2.wad, but this will depend on the levels used)
