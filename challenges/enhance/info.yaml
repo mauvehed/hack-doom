@@ -1,0 +1,11 @@
+---
+name:                 "enhance"
+author:               "FOXX"
+flag:                 "{z00m_&_enhance}"
+level:                "1"
+type:                 "steganography"
+hint:                 "layers"
+description:          >
+  There is a hidden message within this image.
+  To find it you'll need to "enhance."
+
