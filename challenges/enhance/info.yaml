@@ -1,7 +1,7 @@
 ---
 name:                 "enhance"
 author:               "FOXX"
-flag:                 "{z00m_&_enhance}"
+flag:                 "{zoom_&_enhance}"
 level:                "1"
 type:                 "steganography"
 hint:                 "layers"
