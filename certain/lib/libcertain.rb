@@ -48,8 +48,9 @@ class GameServer
       i.close
     end
 
+    # Parse output from the @doombin
     while res = o.gets
-      puts res
+      puts "Command not recognized:  #{res}" if !gc.commands.has_key? res
     end
   end
 
