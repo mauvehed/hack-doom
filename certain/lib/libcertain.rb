@@ -50,7 +50,7 @@ class GameServer
 
     # Parse output from the @doombin
     while res = o.gets
-      puts "Command not recognized:  #{res}" if !gc.commands.has_key? res
+      gc.commands.each {|x| puts res if res.include? x}
     end
   end
 
@@ -73,15 +73,13 @@ end
 class GameCommand < GameEvent
   def initialize
     # List of valid commands
-    @commands = { 'hackswitch' => 'Hackswitch',
-                  'secret'     => 'Secret' }
+    @commands = [ 'Hackswitch', 'Secret' ]
   end
 
   # Translate the requested text into a command
   def command (request)
     tokens = request.split(/\s+/)
     raise ArgumentError, "Not a command" if tokens.empty?
-    raise ArgumentError, "Unknown command" unless @commands.has_key? tokens[0]
   end
 end
 
