@@ -50,7 +50,8 @@ class GameServer
 
     # Parse output from the @doombin
     while res = o.gets
-      gc.commands.each {|x| puts res if res.include? x}
+      # Output only recognized commands
+      puts res if res =~ gc.commands
     end
   end
 
@@ -72,8 +73,11 @@ end
 # GameCommand is for events originating within a game
 class GameCommand < GameEvent
   def initialize
-    # List of valid commands
-    @commands = [ 'Hackswitch', 'Secret' ]
+    # Union of regular expressions matching valid commands in the server log
+    @commands = Regexp.union [ /^Secret\ found!$/,
+                  /^Area\ \d+\ Hackswitch\ activated!$/,
+                  /^.+\ joined\ the\ game\.$/,
+                  /^.+\ exited the level.$/ ]
   end
 
   # Translate the requested text into a command
