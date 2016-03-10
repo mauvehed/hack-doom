@@ -12,7 +12,7 @@ To control monster spawns you'll use the "HackDoom SpawnEnemy" script.  It takes
 * *MonstID*:  unique monster identifier, almost never needed.  Defaults to zero if not specified. (optional)
 
 __Usage Examples__
-> pukename "HackDoom SpawnEnemy" 11
+> pukename "HackDoom SpawnEnemy" 11 2
 
 This spawns a Chainguy at all Enemy Spawners in the first Area with teleport fog and MonsterID 0.
 
