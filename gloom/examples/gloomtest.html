@@ -13,6 +13,22 @@
           ws.send("hello server");
         };
       });
+
+      //basic ajax example using jquery
+      function clickEvent(){
+        $.ajax{(
+          type: 'POST',
+          url: 'controller/function',
+          data: {Var: 'value'},
+          success:function(e){
+            //do shit
+          },
+          error:function(e){
+            alert(e);
+          }
+        )};
+      }
+
     </script>
   </head>
   <body>
