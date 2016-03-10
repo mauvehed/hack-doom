@@ -37,7 +37,7 @@ Edge challenges are unlocked by Marines finding the secret area in each Area.  E
 Hackdoors are special doors that are only able to be opened by Control.  There is only one per Area and it is unlocked via Core challenges.
 
 ## Hackswitch ##
-Hackswitches are special switches that are only able to be activated by Marines.  There is only one per Area and it unlocks the next Area's Core challenges.
+Hackswitches are special switches that are only able to be activated by Marines.  There is only one per Area and it unlocks the next Area's Core challenges.  When one is activated, it begins spawning an enemy type through the Area's spawners.
 
 ## PowerUp ##
 PowerUps are powerful items spawned by the server.  They are dropped into the game via one-time use PowerUp Spawners.  Available PowerUps include:
@@ -51,7 +51,7 @@ PowerUps are powerful items spawned by the server.  They are dropped into the ga
 
 ## Spawners ##
 ### Enemy Spawner ###
-One of two types of spawner is the Enemy Spawner, a ZDoom MapSpot where enemies can be instantaneously created by the server.  Enemy Spawners in an Area will continually spawn until the next Hackdoor is unlocked.
+One of two types of spawner is the Enemy Spawner, a ZDoom MapSpot where enemies can be instantaneously created by the server.  Once an Area's Hackswitch is activated the Enemy Spawners in an Area will continually spawn until the next Hackdoor is unlocked.
 
 ### PowerUp Spawner ###
 The second type of spawner is the PowerUp Spawner, a ZDoom MapSpot where PowerUps can be instantaneously created by the server.  There is only one per Area, is unlocked by the secret area within that Area, and can only be used once via Edge challenge.
