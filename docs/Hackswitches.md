@@ -1,5 +1,5 @@
 # Hackswitches #
-__Hackswitches__ are an important component of Hack Doom.  They guard Core Challenges and are unable to be activated by Control, only by Marines.  When Marines activate Hackswitches it unlocks Core Challenges, clearing the way for Control to complete them.
+__Hackswitches__ are an important component of Hack Doom.  They guard Core Challenges and are unable to be activated by Control, only by Marines.  When Marines activate Hackswitches it unlocks Core Challenges, clearing the way for Control to complete them.  When a Hackswitch is activated though it ALSO begins spawning enemies from that Area's Enemy Spawners until the Core Challenge is completed!
 
 # Level Editing #
 Hackswitches rely on appropriate *action specials* attached to a switch in each Area.  The switch may be unique for every map but for Marines' sanity should all look identical and unique to everything else in the level.  Hackswitches are switches in all regards but do not need to be attached to anything else.  There should always be precisely __one__ Hackswitch __per Area__.  Without it the game cannot continue, though positioning of it is entirely up to the level designer.
