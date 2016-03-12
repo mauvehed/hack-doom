@@ -10,45 +10,26 @@ require_relative "../lib/libcertain.rb"
 require "optparse"
 
 # Global variables
-$verbose = false
-$nowebsocket = false
 $stdout.sync = true
 
 # Default argument values
-options = {:websocketport => '5238', :wadfiles => [], :assets => ['hackdoom.pk3'], :iwad => "doom2.wad", :level => "", :verbose => 'false'}
+options = {:wadfiles => [], :assets => ['hackdoom.pk3'], :iwad => "doom2.wad", :level => ""}
 
 # Check number of arguments and for if the user requests help
 parser = OptionParser.new do |o|
   o.banner = "Usage: #{$0} <options>"
-  o.on("--websocketport PORT", "Port number to present via websocket") { |i| options[:websocketport] = i }
   o.on("--wadfiles A,B,C[...]", Array, "WAD files to run the server with") { |wads| options[:wadfiles] = wads }
   o.on("--assets D,E,F[...]", Array, "Asset files to load in Certain") { |files| options[:assets] = files }
   o.on("--iwad IWAD", "IWAD file (doom2.wad, doom.wad, etc)") { |iwad| options[:iwad] = iwad }
   o.on("--marines NUM", "Number of Marines") { |i| options[:marines] = i }
   o.on("--level LEVEL", "Level to load") { |level| options[:level] = level }
-  o.on( '-v', '--verbose', 'Output debugging information' ) { $verbose = true}
-  o.on( '-n', '--nowebsocket', 'Do not start with websocketd.' ) { $nowebsocket = true}
   o.on('-h') { puts o; exit }
 end
 parser.parse!
 
 puts "Certain Doom launching..."
 
-if $verbose == true then
-  puts "Websocket port:  #{options[:websocketport]}"
-  puts "IWAD:  #{options[:iwad]}"
-  puts "WADs:\n"
-    unless options[:wadfiles].empty? then options[:wadfiles].each { |i| puts " -#{i}" } end
-  puts "Assets:\n"
-    unless options[:assets].empty? then options[:assets].each { |i| puts " -#{i}" } end
-  puts "Marines:  #{options[:marines]}"
-  puts "Level:  #{options[:level]}"
-  puts "Websocket?  #{$nowebocket}"
-  puts "Verbose?  #{$verbose}"
-end
-
 # Initialize GameServer object
-gameServer = GameServer.new(options[:iwad], options[:assets], options[:wadfiles], options[:marines], options[:level], options[:websocketport])
+gameServer = GameServer.new(options[:iwad], options[:assets], options[:wadfiles], options[:marines], options[:level])
 
-# Run the server
 gameServer.start
