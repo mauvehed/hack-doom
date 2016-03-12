@@ -45,7 +45,7 @@ if $verbose == true then
 end
 
 if !$nowebsocket then
-  `#{$wsbin} --port #{options[:websocketport]} ./certain.rb --iwad #{options[:iwad]} --assets #{options[:assets].join(" ")} --wadfiles #{options[:wadfiles].join(" ")} --marines #{options[:marines]} --level #{options[:level]}` 
+  system("#{$wsbin} --port #{options[:websocketport]} ./certain.rb --iwad #{options[:iwad]} --assets #{options[:assets].join(' ')} --wadfiles #{options[:wadfiles].join(' ')} --marines #{options[:marines]} --level #{options[:level]}")
 else
   system("./certain.rb --iwad #{options[:iwad]} --assets #{options[:assets].join(' ')} --wadfiles #{options[:wadfiles].join(' ')} --marines #{options[:marines]} --level #{options[:level]}")
 end
