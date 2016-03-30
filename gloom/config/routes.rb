@@ -1,9 +1,14 @@
 Rails.application.routes.draw do
+
   root 'welcome#index'
 
-  get 'doomserver/index'
-
   get 'welcome/index'
+
+  get 'doomserver/index'
+  get 'doomserver', to: 'doomserver#index'
+
+  get 'console/show'
+  get 'console', to: 'console#show'
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 
