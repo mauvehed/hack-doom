@@ -1,4 +1,4 @@
-App.console = App.cable.subscriptions.create "ConsoleChannel",
+App.room = App.cable.subscriptions.create "RoomChannel",
   connected: ->
     # Called when the subscription is ready for use on the server
 
@@ -9,11 +9,11 @@ App.console = App.cable.subscriptions.create "ConsoleChannel",
     $('#messages').append data['message']
     # Called when there's incoming data on the websocket for this channel
 
-  send: (message) ->
-    @perform 'send', message: message
+  speak: (message) ->
+    @perform 'speak', message: message
 
-$(document).on 'keypress', '[data-behavior~=console_sender]', (event) ->
+$(document).on 'keypress', '[data-behavior~=room_speaker]', (event) ->
   if event.keyCode is 13 # return = send
-    App.console.send event.target.value
+    App.room.speak event.target.value
     event.target.value =""
-    event.preventDefault()
+    event.preventDefault() 
