@@ -9,6 +9,6 @@ class ConsoleChannel < ApplicationCable::Channel
   end
 
   def send(data)
-    ActionCable.server.broadcast 'message_channel', message: data['message']
+    Message.create! content: data['message']
   end
 end
