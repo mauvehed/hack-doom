@@ -10,7 +10,7 @@ class DoomserverController < ApplicationController
     # Begin command loop
     Thread.new do
       ARGF.each_line do |line|
-        i.puts request
+        i.puts line
       end
 
       i.close
