@@ -9,7 +9,8 @@ class DoomserverController < ApplicationController
 
     # Begin command loop
     Thread.new do
-      ARGF.each_line do |line|
+      #Message.all.each do |line|
+      ARGF.each_line do |line|  #DEBUG
         i.puts line
       end
 
@@ -18,7 +19,7 @@ class DoomserverController < ApplicationController
 
     while res = o.gets
       Message.create! content: res
-      #puts res
+      #puts res                  #DEBUG
     end
   end
 end
