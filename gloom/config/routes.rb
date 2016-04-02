@@ -1,9 +1,6 @@
 Rails.application.routes.draw do
   root 'welcome#index'
 
-  get 'doomserver/index'
-  get 'doomserver', to: 'doomserver#index'
-
   get 'rooms/show'
   get 'rooms', to: 'rooms#show'
 
