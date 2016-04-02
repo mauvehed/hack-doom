@@ -17,7 +17,6 @@ class DoomChannel < ApplicationCable::Channel
 
     # Begin command loop
     Thread.new do
-      #Message.all.each do |line|
       ARGF.each_line do |line|  #DEBUG
         i.puts line
       end
@@ -29,5 +28,9 @@ class DoomChannel < ApplicationCable::Channel
       Message.create! content: res
       #puts res                  #DEBUG
     end
+  end
+
+  def relay(data)
+    puts data['message']
   end
 end
