@@ -12,28 +12,34 @@ class DoomChannel < ApplicationCable::Channel
 
   def startserver
     command = "~/repos/hack-doom/certain/bin/certain.rb --iwad ~/.zandronum/doom2.wad --wadfiles ~/repos/hack-doom/levels/hackdoom001/hackdoom001.wad --assets ~/repos/hack-doom/assets/hackdoom.pk3 --level hack01 --marines 2"
+    running = `ps aux |grep "#{command}" | grep -v grep | wc -l`
 
-    @outpipe, @inpipe = IO.pipe
-    i, o = Open3.popen2 "#{command}"
+    if running == 0 then
+      @outpipe, @inpipe = IO.pipe
+      i, o = Open3.popen2 "#{command}"
 
-    # Begin command loop
-    Thread.new do
-      @outpipe.read.each_line do |line|
-      #ARGF.each_line do |line|  #DEBUG
-        i.puts line
-        puts line
+      # Begin command loop
+      Thread.new do
+        @outpipe.read.each_line do |line|
+        #ARGF.each_line do |line|  #DEBUG
+          i.puts line
+          puts line                #DEBUG
+        end
+
+        i.close
       end
 
-      i.close
-    end
-
-    while res = o.gets
-      Message.create! content: res
-      #puts res                  #DEBUG
+      while res = o.gets
+        Message.create! content: res
+        #puts res                  #DEBUG
+      end
+    else
+      puts "Server already running."
     end
   end
 
   def relay(data)
     @inpipe.write(data)
+    puts data                      #DEBUG
   end
 end
