@@ -13,12 +13,15 @@ class DoomChannel < ApplicationCable::Channel
   def startserver
     command = "~/repos/hack-doom/certain/bin/certain.rb --iwad ~/.zandronum/doom2.wad --wadfiles ~/repos/hack-doom/levels/hackdoom001/hackdoom001.wad --assets ~/repos/hack-doom/assets/hackdoom.pk3 --level hack01 --marines 2"
 
+    @outpipe, @inpipe = IO.pipe
     i, o = Open3.popen2 "#{command}"
 
     # Begin command loop
     Thread.new do
-      ARGF.each_line do |line|  #DEBUG
+      @outpipe.read.each_line do |line|
+      #ARGF.each_line do |line|  #DEBUG
         i.puts line
+        puts line
       end
 
       i.close
@@ -31,6 +34,6 @@ class DoomChannel < ApplicationCable::Channel
   end
 
   def relay(data)
-    puts data['message']
+    @inpipe.write(data)
   end
 end

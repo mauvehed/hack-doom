@@ -8,3 +8,4 @@ App.doom = App.cable.subscriptions.create "DoomChannel",
 
   received: (data) ->
     # Called when there's incoming data on the websocket for this channel
+    @perform 'relay', message: data['message']
