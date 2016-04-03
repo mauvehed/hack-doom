@@ -11,10 +11,13 @@ class DoomChannel < ApplicationCable::Channel
   end
 
   def startserver
-    command = "~/repos/hack-doom/certain/bin/certain.rb --iwad ~/.zandronum/doom2.wad --wadfiles ~/repos/hack-doom/levels/hackdoom001/hackdoom001.wad --assets ~/repos/hack-doom/assets/hackdoom.pk3 --level hack01 --marines 2"
-    running = `ps aux |grep "#{command}" | grep -v grep | wc -l`
+    servercheck = ""
+    servercheck = `ps aux |grep \"#{command}\" | grep -v grep`
 
-    if running == 0 then
+    command = "~/repos/hack-doom/certain/bin/certain.rb --iwad ~/.zandronum/doom2.wad --wadfiles ~/repos/hack-doom/levels/hackdoom001/hackdoom001.wad --assets ~/repos/hack-doom/assets/hackdoom.pk3 --level hack01 --marines 2"
+
+    # Do a check to make sure the server's not already running
+    if servercheck == "" then
       @outpipe, @inpipe = IO.pipe
       i, o = Open3.popen2 "#{command}"
 
