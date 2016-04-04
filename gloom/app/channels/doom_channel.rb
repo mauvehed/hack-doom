@@ -27,8 +27,8 @@ class DoomChannel < ApplicationCable::Channel
       # Begin command loop
       Thread.new do
         @outpipe.read.each do |line|
-        #ARGF.each_line do |line|               #DEBUG
-          puts line                             #DEBUG
+        #ARGF.each_line do |line|                           #DEBUG
+          puts line                                         #DEBUG
           i.puts line
         end
 
@@ -44,9 +44,14 @@ class DoomChannel < ApplicationCable::Channel
   end
 
   def relay(data)
-    puts "Data in DoomChannel::relay:  #{data}"  #DEBUG
-    stringdata = Sanitize.clean(data['message'])
-    puts "StringData in DoomChannel::relay:  #{stringdata}"  #DEBUG
+    puts "Data in DoomChannel::relay:  #{data}"              #DEBUG
+
+    # Process the input from room_channel
+    datastring = Sanitize.clean(data['message'])
+    datastring.gsub!("\n", "")
+    datastring.gsub!(/^\s+/, "")
+
+    #puts "StringData in DoomChannel::relay:  #{datastring}"  #DEBUG
     @inpipe.write(data)
   end
 end
