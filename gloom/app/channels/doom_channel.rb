@@ -22,7 +22,6 @@ class DoomChannel < ApplicationCable::Channel
       # Store output from Certain
       while res = @outpipe.gets
         DoomLog.create! content: res
-        puts res                                              #DEBUG
       end
     else
       puts "Server already running."
