@@ -19,9 +19,9 @@ class DoomChannel < ApplicationCable::Channel
     if servercheck == "" then
       @inpipe, @outpipe = Open3.popen2 "#{command}"
 
-      # Output from Certain
+      # Store output from Certain
       while res = @outpipe.gets
-        #Message.create! content: res
+        DoomLog.create! content: res
         puts res                                              #DEBUG
       end
     else
@@ -36,8 +36,9 @@ class DoomChannel < ApplicationCable::Channel
     datastring = Sanitize.clean(data['message'])
     datastring.gsub!("\n", "")
     datastring.gsub!(/^\s+/, "")
-
     #puts "StringData in DoomChannel::relay:  #{datastring}"  #DEBUG
+
+    # Send the string over to Certain
     @inpipe.puts("#{datastring}")
   end
 end
