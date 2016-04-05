@@ -2,11 +2,6 @@
 require 'open3'
 
 class DoomChannel < ApplicationCable::Channel
-  def initialize(*args)
-    @outpipe, @inpipe = IO.pipe
-    super(*args)
-  end
-
   def subscribed
     stream_from "room_channel"
   end
@@ -22,20 +17,10 @@ class DoomChannel < ApplicationCable::Channel
 
     # Do a check to make sure the server's not already running
     if servercheck == "" then
-      i, o = Open3.popen2 "#{command}"
+      @inpipe, @outpipe = Open3.popen2 "#{command}"
 
-      # Begin command loop
-      Thread.new do
-        @outpipe.read.each do |line|
-        #ARGF.each_line do |line|                           #DEBUG
-          puts line                                         #DEBUG
-          i.puts line
-        end
-
-        i.close
-      end
-
-      while res = o.gets
+      # Output from Certain
+      while res = @outpipe.gets
         Message.create! content: res
       end
     else
@@ -44,7 +29,7 @@ class DoomChannel < ApplicationCable::Channel
   end
 
   def relay(data)
-    puts "Data in DoomChannel::relay:  #{data}"              #DEBUG
+    #puts "Data in DoomChannel::relay:  #{data}"              #DEBUG
 
     # Process the input from room_channel
     datastring = Sanitize.clean(data['message'])
@@ -52,6 +37,6 @@ class DoomChannel < ApplicationCable::Channel
     datastring.gsub!(/^\s+/, "")
 
     #puts "StringData in DoomChannel::relay:  #{datastring}"  #DEBUG
-    @inpipe.write(data)
+    @inpipe.puts("#{datastring}")
   end
 end
