@@ -1,7 +1,29 @@
 #!/usr/bin/env bash
 
+# Level Select
+levels=$(ls ../levels)
+levelcount=$(ls ../levels | wc -l)
+levelarray=""
+for i in $levels; do
+  levelarray="${levelarray} \"${i}\" \"level\""
+done
+
+LEVELCHOICE=$(whiptail --title "Level"\
+  --menu "Choose level:"\
+  30 50 20\
+  ${levelarray}\
+  3>&2 2>&1 1>&3)
+echo "Level chosen:  $LEVELCHOICE"
+
+# Supply configuration name
+CONFIGNAME=$(whiptail --title "Configuration Name"\
+  --inputbox "Please supply a configuration name:"\
+  10 40\
+  3>&1 1>&2 2>&3)
+echo "Config name:  $CONFIGNAME"
+
 # Confirm changes with user
-whiptail --yesno "Commit changes?" 10 30
+whiptail --title "Confirm" --yesno "Commit changes?" 10 30
 COMMIT=$?
 
 if [ $COMMIT -eq 0 ]; then
