@@ -1,11 +1,12 @@
-#!/usr/bin/env ruby
-require 'yaml'
+#!/usr/bin/env bash
 
-# Confirm changes
-commit = system("whiptail --yesno \"Commit changes?\" 10 50")
+# Confirm changes with user
+whiptail --yesno "Commit changes?" 10 30
+COMMIT=$?
 
-if commit then
-  puts "Committing changes..."
+if [ $COMMIT -eq 0 ]; then
+  echo "Committing changes..."
 else
+  echo "Cancelling setup"
   exit
-end
+fi
