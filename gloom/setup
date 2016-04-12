@@ -1,34 +1,24 @@
-#!/usr/bin/env bash
+#!/usr/bin/env ruby
+require 'yaml'
+
+# Acquire the levels available and properly format for whiptail
+levels = Dir.entries('../levels').select {|entry| File.directory? File.join('../levels',entry) and !(entry =='.' || entry == '..') }
+levels = levels.flat_map { |x| [x, "level"] }
 
 # Level Select
-levels=$(ls ../levels)
-levelcount=$(ls ../levels | wc -l)
-levelarray=""
-for i in $levels; do
-  levelarray="${levelarray} \"${i}\" \"level\""
-done
-
-LEVELCHOICE=$(whiptail --title "Level"\
-  --menu "Choose level:"\
-  30 50 20\
-  ${levelarray}\
-  3>&2 2>&1 1>&3)
-echo "Level chosen:  $LEVELCHOICE"
+levelchoice = `whiptail --title "Level" --menu "Choose level:" 30 50 20 #{levels.join(" ")} 3>&2 2>&1 1>&3`
+puts "Level chosen:  #{levelchoice}"
 
 # Supply configuration name
-CONFIGNAME=$(whiptail --title "Configuration Name"\
-  --inputbox "Please supply a configuration name:"\
-  10 40\
-  3>&1 1>&2 2>&3)
-echo "Config name:  $CONFIGNAME"
+configname = `whiptail --title "Configuration Name" --inputbox "Please supply a configuration name:" 10 40 3>&1 1>&2 2>&3`
+puts "Config name:  #{configname}"
 
 # Confirm changes with user
-whiptail --title "Confirm" --yesno "Commit changes?" 10 30
-COMMIT=$?
+commit = `whiptail --title "Confirm" --yesno "Commit changes?" 10 30 3>&1 1>&2 2>&3`
 
-if [ $COMMIT -eq 0 ]; then
-  echo "Committing changes..."
+if commit
+  puts "Committing changes..."
 else
-  echo "Cancelling setup"
+  puts "Cancelling setup"
   exit
-fi
+end
