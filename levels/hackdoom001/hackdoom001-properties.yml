@@ -1,7 +1,7 @@
 ---
-mapname:  hackdoom001
-filename: hackdoom001.wad
-levels:
-  'HACK01'
-    areas:     6
-    hacklifts: [ 200, 300, 400 ]
+ mapname:  hackdoom001
+ filename: hackdoom001.wad
+ levels:
+   HACK01:
+     - areas:     6
+     - hacklifts: [ 200, 300, 400 ]
