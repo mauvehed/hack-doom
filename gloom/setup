@@ -9,11 +9,6 @@ levels = levels.flat_map { |x| [x, "level"] }
 levelchoice = `whiptail --title "Level" --menu "Choose level:" 30 50 20 #{levels.join(" ")} 3>&2 2>&1 1>&3`
 level = YAML.load_file("../levels/#{levelchoice}/#{levelchoice}-properties.yml")
 
-# Determine level properties
-areas = level["levels"].each {|x| x[0]["areas"]}
-map = level["levels"].each {|x| x[0]}
-hacklifts = level["levels"].each {|x| x[1]["hacklifts"]}
-
 # Supply configuration name
 configname = `whiptail --title "Configuration Name" --inputbox "Please supply a configuration name:" 10 40 3>&1 1>&2 2>&3`
 
@@ -24,9 +19,8 @@ if commit
   puts configname
   puts level["mapname"] 
   puts level["filename"] 
-  puts map
-  puts areas
-  puts hacklifts
+  puts level["areas"]
+  puts level["hacklifts"].join(" ")
 else
   puts "Cancelling setup"
   exit
