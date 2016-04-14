@@ -1,16 +1,29 @@
 #!/usr/bin/env ruby
 require 'yaml'
 
+# Functions
+
+# Collect directory entries for a list
+def dirEntries(location)
+  Dir.entries(location).select {|entry| File.directory? File.join(location,entry) and !(entry =='.' || entry == '..') }
+end
+
+# Logic
+
 # Acquire the levels available and properly format for whiptail
-levels = Dir.entries('../levels').select {|entry| File.directory? File.join('../levels',entry) and !(entry =='.' || entry == '..') }
+levels = dirEntries('../levels')
 levels = levels.flat_map { |x| [x, "level"] }
 
 # Level Select
 levelchoice = `whiptail --title "Level" --menu "Choose level:" 30 50 20 #{levels.join(" ")} 3>&2 2>&1 1>&3`
 level = YAML.load_file("../levels/#{levelchoice}/#{levelchoice}-properties.yml")
 
+# Acquire the Challenges available and properly format for whiptail
+challenges = dirEntries('../challenges')
+challenges = challenges.flat_map { |x| [x, "challenge"] }
+
 # Ask the user how many Core Challenges per Area
-numcore = `whiptail --title "Challenges" --menu "How many Core Challenges per Area?" 30 50 20\
+numcore = `whiptail --title "Core Challenges" --menu "How many Core Challenges per Area?" 30 50 20\
   "1" "One per Area"\
   "2" "Two per Area"\
   "3" "Three per Area"\
@@ -18,11 +31,12 @@ numcore = `whiptail --title "Challenges" --menu "How many Core Challenges per Ar
   "5" "Five per Area" 3>&2 2>&1 1>&3`
 
 # Determine Core Challenges per Area
-corechallenges = Array.new(numcore.to_i) { |x| "" }
+corechallenges = Array.new(level["areas"].to_i) { Array.new(numcore.to_i, "")}
 i = 0
 while i < level["areas"].to_i do
-  numcore.to_i.times do
-    corechallenges[i] << "Challenge #{i} here " unless corechallenges[i].nil?
+  numcore.to_i.times do |core|
+    corechallenges[i][core] = `whiptail --title "Core Challenges" --menu "Choose a challenge for Area #{i + 1}" 30 50 20\
+  #{challenges.join(" ")} 3>&2 2>&1 1>&3`
   end
 
   i += 1
@@ -32,7 +46,8 @@ end
 edgechallenges = Array.new(level["areas"].to_i) { |x| "" }
 i = 0
 while i < level["areas"].to_i do
-  edgechallenges[i] << "Challenge #{i} here " unless edgechallenges[i].nil?
+  edgechallenges[i] = `whiptail --title "Edge Challenges" --menu "Choose a challenge for Area #{i + 1}" 30 50 20\
+  #{challenges.join(" ")} 3>&2 2>&1 1>&3`
 
   i += 1
 end
@@ -49,8 +64,18 @@ if commit
   puts "Filename:  #{level["filename"]}"
   puts "Areas:  #{level["areas"]}"
   puts "Number of Challenges per Area:  #{numcore}"
-  puts "Core Challenges:\n#{corechallenges.each {|x| puts x}}"
-  puts "Edge Challenges:\n#{edgechallenges.each {|x| puts x}}"
+
+  puts "Core Challenges:"
+  i = 0
+  while i < corechallenges.length do
+    puts "Area #{i + 1}"
+    corechallenges[i].each {|x| puts x}
+    i += 1
+  end
+
+  puts "Edge Challenges:"
+  edgechallenges.each {|x| puts "Challenge:  #{x}"}
+
   puts "Hacklifts:  #{level["hacklifts"].join(" ")}"
 else
   puts "Cancelling setup"
