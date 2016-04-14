@@ -9,21 +9,30 @@ levels = levels.flat_map { |x| [x, "level"] }
 levelchoice = `whiptail --title "Level" --menu "Choose level:" 30 50 20 #{levels.join(" ")} 3>&2 2>&1 1>&3`
 level = YAML.load_file("../levels/#{levelchoice}/#{levelchoice}-properties.yml")
 
-# Ask the user how many Challenges per Area
-numchallenges = `whiptail --title "Challenges" --menu "How many Core Challenges per Area?" 30 50 20\
+# Ask the user how many Core Challenges per Area
+numcore = `whiptail --title "Challenges" --menu "How many Core Challenges per Area?" 30 50 20\
   "1" "One per Area"\
   "2" "Two per Area"\
   "3" "Three per Area"\
   "4" "Four per Area"\
   "5" "Five per Area" 3>&2 2>&1 1>&3`
 
-# Determine Challenges per Area
-challenges = Array.new(numchallenges.to_i) { |x| "" }
+# Determine Core Challenges per Area
+corechallenges = Array.new(numcore.to_i) { |x| "" }
 i = 0
 while i < level["areas"].to_i do
-  numchallenges.to_i.times do
-    challenges[i] << "Challenge here "
+  numcore.to_i.times do
+    corechallenges[i] << "Challenge #{i} here " unless corechallenges[i].nil?
   end
+
+  i += 1
+end
+
+# Determine Edge Challenges
+edgechallenges = Array.new(level["areas"].to_i) { |x| "" }
+i = 0
+while i < level["areas"].to_i do
+  edgechallenges[i] << "Challenge #{i} here " unless edgechallenges[i].nil?
 
   i += 1
 end
@@ -35,13 +44,14 @@ configname = `whiptail --title "Configuration Name" --inputbox "Please supply a 
 commit = `whiptail --title "Confirm" --yesno "Commit changes?" 10 30 3>&1 1>&2 2>&3`
 
 if commit
-  puts configname
-  puts level["mapname"] 
-  puts level["filename"] 
-  puts level["areas"]
-  puts numchallenges
-  puts challenges.each {|x| puts x}
-  puts level["hacklifts"].join(" ")
+  puts "Config name:  #{configname}"
+  puts "Map:  #{level["mapname"]}"
+  puts "Filename:  #{level["filename"]}"
+  puts "Areas:  #{level["areas"]}"
+  puts "Number of Challenges per Area:  #{numcore}"
+  puts "Core Challenges:\n#{corechallenges.each {|x| puts x}}"
+  puts "Edge Challenges:\n#{edgechallenges.each {|x| puts x}}"
+  puts "Hacklifts:  #{level["hacklifts"].join(" ")}"
 else
   puts "Cancelling setup"
   exit
