@@ -1,0 +1,2 @@
+class DoomServerController < ApplicationController
+end
