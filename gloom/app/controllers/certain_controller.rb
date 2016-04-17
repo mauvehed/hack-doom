@@ -8,10 +8,10 @@ class CertainController < ApplicationController
 
     # Do a check to make sure the server's not already running
     if servercheck == "" then
-      @inpipe, @outpipe = Open3.popen2 "#{command}"
+      @@inpipe, @@outpipe = Open3.popen2 "#{command}"
 
       # Store output from Certain
-      while res = @outpipe.gets
+      while res = @@outpipe.gets
         DoomLog.create! content: res
       end
     else
@@ -32,8 +32,8 @@ class CertainController < ApplicationController
   end
 
   # Send the string over to Certain
-  def update(message)
-    @inpipe.puts("#{message}")
+  def self.update(message)
+    @@inpipe.puts("#{message}")
   end
 
   def destroy
