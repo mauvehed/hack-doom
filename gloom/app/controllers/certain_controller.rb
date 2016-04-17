@@ -1,6 +1,6 @@
 require 'open3'
 
-class DoomServerController < ApplicationController
+class CertainController < ApplicationController
   def index
     command = "~/repos/hack-doom/certain/bin/certain.rb --iwad ~/.zandronum/doom2.wad --wadfiles ~/repos/hack-doom/levels/hackdoom001/hackdoom001.wad --assets ~/repos/hack-doom/assets/hackdoom.pk3 --level hack01 --marines 2"
     servercheck = ""

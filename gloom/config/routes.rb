@@ -4,8 +4,8 @@ Rails.application.routes.draw do
   get 'rooms/show'
   get 'rooms', to: 'rooms#show'
 
-  get 'doomserver/index'
-  get 'doomserver', to: 'doomserver#index'
+  get 'certain/index'
+  get 'certain', to: 'certain#index'
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 

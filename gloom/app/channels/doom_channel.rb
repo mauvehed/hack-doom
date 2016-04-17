@@ -81,7 +81,7 @@ class DoomChannel < ApplicationCable::Channel
     #puts "StringData in DoomChannel::relay:  #{datastring}"  #DEBUG
 
     # Send the string over to DoomServerController
-    DoomServerController#update(datastring)
+    CertainController.update(datastring)
   end
 
   # Change the map
