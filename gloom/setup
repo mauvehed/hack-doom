@@ -3,16 +3,6 @@ require 'yaml'
 
 # Objects
 class GameConfig
-  def initialize
-    @name = ""
-    @mapname = ""
-    @mapfile = ""
-    @areas = 0
-    @numcore = "" 
-    @core = Array.new
-    @edge = Array.new
-    @hacklifts = Array.new
-  end
 
   attr_accessor :name, :mapname, :mapfile, :areas, :numcore, :hacklifts, :core, :edge
 end
@@ -90,26 +80,6 @@ commit = `whiptail --title "Confirm" --yesno "Commit changes?" 10 30 3>&1 1>&2 2
 # Store configuration
 if commit
   File.open("#{hdconfig.name}.yml", 'w') {|f| f.write hdconfig.to_yaml}
-
-  # DEBUG
-  #puts "Config name:  #{hdconfig.name}"
-  #puts "Map:  #{hdconfig.mapname}"
-  #puts "Filename:  #{hdconfig.mapfile}"
-  #puts "Areas:  #{hdconfig.areas}"
-  #puts "Number of Challenges per Area:  #{hdconfig.numcore}"
-  #
-  #puts "Core Challenges:"
-  #i = 0
-  #while i < hdconfig.core.length do
-  #  puts "Area #{i + 1}"
-  #  hdconfig.core[i].each {|x| puts x}
-  #  i += 1
-  #end
-  #
-  #puts "Edge Challenges:"
-  #hdconfig.edge.each {|x| puts "Challenge:  #{x}"}
-  #
-  #puts "Hacklifts:  #{hdconfig.hacklifts.join(" ")}"
 else
   puts "Cancelling setup"
   exit
