@@ -23,10 +23,15 @@ hdconfig = GameConfig.new
 if ARGV[0] != nil then
   puts "Checking for configuration file #{ARGV[0]}..."
 
+  # Clean and fill the database
   if File.exists?(ARGV[0]) then
     hdconfig = YAML::load_file(ARGV[0])
     Dir.foreach("./db"){|x| if x.chomp =~ /.*\.sqlite3$/ then File.delete("./db/#{x.chomp}") end}
     puts `rails db:migrate`
+    open('./db/seeds.rb', 'a') {|f|
+      f.puts "Level.create(:name => \"#{hdconfig.name}\", :areas => #{hdconfig.areas}, :hacklifts => \"#{hdconfig.hacklifts.join(" ")}\")"
+    }
+    puts `rails db:seed`
   else
     puts "File not found."
   end
