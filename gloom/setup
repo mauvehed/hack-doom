@@ -19,68 +19,81 @@ end
 # Initialize configuration
 hdconfig = GameConfig.new
 
-# Acquire the levels available and properly format for whiptail
-levels = dirEntries('../levels')
-levels = levels.flat_map { |x| [x, "level"] }
+# Check to see if a config file has been provided
+if ARGV[0] != nil then
+  puts "Checking for configuration file #{ARGV[0]}..."
 
-# Level Select
-levelchoice = `whiptail --title "Level" --menu "Choose level:" 30 50 20 #{levels.join(" ")} 3>&2 2>&1 1>&3`
-level = YAML.load_file("../levels/#{levelchoice}/#{levelchoice}-properties.yml")
+  if File.exists?(ARGV[0]) then
+    hdconfig = YAML::load_file(ARGV[0])
+  else
+    puts "File not found."
+  end 
 
-# Set config values from level
-hdconfig.mapname = level["mapname"]
-hdconfig.mapfile = level["filename"]
-hdconfig.areas = level["areas"]
-hdconfig.hacklifts = level["hacklifts"]
-
-# Acquire the Challenges available and properly format for whiptail
-challenges = dirEntries('../challenges')
-challenges = challenges.flat_map { |x| [x, "challenge"] }
-
-# Ask the user how many Core Challenges per Area
-hdconfig.numcore = `whiptail --title "Core Challenges" --menu "How many Core Challenges per Area?" 30 50 20\
-  "1" "One per Area"\
-  "2" "Two per Area"\
-  "3" "Three per Area"\
-  "4" "Four per Area"\
-  "5" "Five per Area" 3>&2 2>&1 1>&3`
-
-# Determine Core Challenges per Area
-corechallenges = Array.new(hdconfig.areas.to_i) { Array.new(hdconfig.numcore.to_i, "")}
-i = 0
-while i < hdconfig.areas.to_i do
-  hdconfig.numcore.to_i.times do |core|
-    corechallenges[i][core] = `whiptail --title "Core Challenges" --menu "Choose a challenge for Area #{i + 1}" 30 50 20\
-  #{challenges.join(" ")} 3>&2 2>&1 1>&3`
-  end
-
-  i += 1
-end
-
-# Determine Edge Challenges
-edgechallenges = Array.new(hdconfig.areas.to_i) { |x| "" }
-i = 0
-while i < hdconfig.areas.to_i do
-  edgechallenges[i] = `whiptail --title "Edge Challenges" --menu "Choose a challenge for Area #{i + 1}" 30 50 20\
-  #{challenges.join(" ")} 3>&2 2>&1 1>&3`
-
-  i += 1
-end
-
-# Store Challenges
-hdconfig.core = corechallenges
-hdconfig.edge = edgechallenges
-
-# Supply configuration name
-hdconfig.name = `whiptail --title "Configuration Name" --inputbox "Please supply a configuration name:" 10 40 3>&1 1>&2 2>&3`
-
-# Confirm changes with user
-commit = `whiptail --title "Confirm" --yesno "Commit changes?" 10 30 3>&1 1>&2 2>&3`
-
-# Store configuration
-if commit
-  File.open("#{hdconfig.name}.yml", 'w') {|f| f.write hdconfig.to_yaml}
+# Config file not provided
 else
-  puts "Cancelling setup"
-  exit
+  # Acquire the levels available and properly format for whiptail
+  levels = dirEntries('../levels')
+  levels = levels.flat_map { |x| [x, "level"] }
+  
+  # Level Select
+  levelchoice = `whiptail --title "Level" --menu "Choose level:" 30 50 20 #{levels.join(" ")} 3>&2 2>&1 1>&3`
+  level = YAML.load_file("../levels/#{levelchoice}/#{levelchoice}-properties.yml")
+  
+  # Set config values from level
+  hdconfig.mapname = level["mapname"]
+  hdconfig.mapfile = level["filename"]
+  hdconfig.areas = level["areas"]
+  hdconfig.hacklifts = level["hacklifts"]
+  
+  # Acquire the Challenges available and properly format for whiptail
+  challenges = dirEntries('../challenges')
+  challenges = challenges.flat_map { |x| [x, "challenge"] }
+  
+  # Ask the user how many Core Challenges per Area
+  hdconfig.numcore = `whiptail --title "Core Challenges" --menu "How many Core Challenges per Area?" 30 50 20\
+    "1" "One per Area"\
+    "2" "Two per Area"\
+    "3" "Three per Area"\
+    "4" "Four per Area"\
+    "5" "Five per Area" 3>&2 2>&1 1>&3`
+  
+  # Determine Core Challenges per Area
+  corechallenges = Array.new(hdconfig.areas.to_i) { Array.new(hdconfig.numcore.to_i, "")}
+  i = 0
+  while i < hdconfig.areas.to_i do
+    hdconfig.numcore.to_i.times do |core|
+      corechallenges[i][core] = `whiptail --title "Core Challenges" --menu "Choose a challenge for Area #{i + 1}" 30 50 20\
+    #{challenges.join(" ")} 3>&2 2>&1 1>&3`
+    end
+  
+    i += 1
+  end
+  
+  # Determine Edge Challenges
+  edgechallenges = Array.new(hdconfig.areas.to_i) { |x| "" }
+  i = 0
+  while i < hdconfig.areas.to_i do
+    edgechallenges[i] = `whiptail --title "Edge Challenges" --menu "Choose a challenge for Area #{i + 1}" 30 50 20\
+    #{challenges.join(" ")} 3>&2 2>&1 1>&3`
+  
+    i += 1
+  end
+  
+  # Store Challenges
+  hdconfig.core = corechallenges
+  hdconfig.edge = edgechallenges
+  
+  # Supply configuration name
+  hdconfig.name = `whiptail --title "Configuration Name" --inputbox "Please supply a configuration name:" 10 40 3>&1 1>&2 2>&3`
+  
+  # Confirm changes with user
+  commit = `whiptail --title "Confirm" --yesno "Commit changes?" 10 30 3>&1 1>&2 2>&3`
+  
+  # Store configuration
+  if commit
+    File.open("#{hdconfig.name}.yml", 'w') {|f| f.write hdconfig.to_yaml}
+  else
+    puts "Cancelling setup"
+    exit
+  end
 end
