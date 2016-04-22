@@ -25,6 +25,8 @@ if ARGV[0] != nil then
 
   if File.exists?(ARGV[0]) then
     hdconfig = YAML::load_file(ARGV[0])
+    Dir.foreach("./db"){|x| if x.chomp =~ /.*\.sqlite3$/ then File.delete("./db/#{x.chomp}") end}
+    puts `rails db:migrate`
   else
     puts "File not found."
   end
