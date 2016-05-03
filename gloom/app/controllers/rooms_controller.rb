@@ -1,6 +1,6 @@
 class RoomsController < ApplicationController
   def show
-    @hacklifts = Level.all.each {|x| x.hacklifts.split}
+    @hacklifts = Hacklift.all
     @messages = Message.all
   end
 end
