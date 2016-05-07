@@ -11,4 +11,10 @@ class RoomChannel < ApplicationCable::Channel
   def speak(data)
     Message.create! content: data['message']
   end
+
+  def lowerhacklift(sector)
+  end
+
+  def raisehacklift(sector)
+  end
 end

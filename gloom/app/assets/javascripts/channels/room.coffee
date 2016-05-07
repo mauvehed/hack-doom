@@ -23,3 +23,9 @@ $(document).on 'keypress', '[data-behavior~=room_speaker]', (event) ->
     App.room.speak event.target.value
     event.target.value =""
     event.preventDefault() 
+
+$(document).on 'mousedown', '[data-behavior~=room_raiser]', (event) ->
+  App.room.raisehacklift event.target.sectorid
+
+$(document).on 'mousedown', '[data-behavior~=room_lower]', (event) ->
+  App.room.lowerhacklift event.target.sectorid

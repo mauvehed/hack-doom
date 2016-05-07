@@ -1,4 +1,9 @@
 <div class="hacklift">
-  <%= button_to "Raise", { action: "raise", id: hacklift.sector }, method: :put %>
-  <%= button_to "Lower", { action: "lower", id: hacklift.sector }, method: :put %>
+  <form>
+    <label>Raise Hacklift</label><br>
+    <input type="checkbox" data-behavior="room_raiser" sectorid=<%= hacklift.sector %>>
+
+    <label>Lower Hacklift</label><br>
+    <input type="checkbox" data-behavior="room_lower" sectorid=<%= hacklift.sector %>>
+  </form>
 </div>
