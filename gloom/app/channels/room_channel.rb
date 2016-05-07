@@ -12,9 +12,11 @@ class RoomChannel < ApplicationCable::Channel
     Message.create! content: data['message']
   end
 
-  def lowerhacklift(sector)
+  def lowerhacklift(data)
+    DoomChannel.lowerhacklift(data['sector'])
   end
 
-  def raisehacklift(sector)
+  def raisehacklift(data)
+    DoomChannel.raisehacklift(data['sector'])
   end
 end

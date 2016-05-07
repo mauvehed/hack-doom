@@ -86,31 +86,31 @@ class DoomChannel < ApplicationCable::Channel
 
   # Change the map
   def loadmap(map)
-    @inpipe.puts("map #{map}")
+    CertainController.update("map #{map}")
   end
 
   # Open an Area's Hackdoor
   def openhackdoor(area)
-    @inpipe.puts("openhackdoor #{area}")
+    CertainController.update("openhackdoor #{area}")
   end
 
   # Spawn enemies in an Area
   def spawnenemy(area, enemy)
-    @inpipe.puts("spawnenemy #{area}1 #{@enemytype[enemy]}")
+    CertainController.update("spawnenemy #{area}1 #{@enemytype[enemy]}")
   end
 
   # Spawn a powerup in an Area
   def spawnpowerup(area, item)
-    @inpipe.puts("spawnenemy #{area}0 #{@poweruptype[item]}")
+    CertainController.update("spawnenemy #{area}0 #{@poweruptype[item]}")
   end
 
   # Lower a hacklift
   def lowerhacklift(lift)
-    @inpipe.puts("lowerhacklift #{lift}")
+    CertainController.update("lowerhacklift #{lift}")
   end
 
   # Raise a hacklift
   def raisehacklift(lift)
-    @inpipe.puts("raisehacklift #{lift}")
+    CertainController.update("raisehacklift #{lift}")
   end
 end
