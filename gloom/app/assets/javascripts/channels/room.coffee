@@ -13,10 +13,10 @@ App.room = App.cable.subscriptions.create "RoomChannel",
     @perform 'speak', message: message
 
   raisehacklift: (sectorid) ->
-    @perform 'raisehacklift', sector: sectorid
+    @perform 'raisehacklift', message: sectorid
 
   lowerhacklift: (sectorid) ->
-    @perform 'lowerhacklift', sector: sectorid
+    @perform 'lowerhacklift', message: sectorid
 
 $(document).on 'keypress', '[data-behavior~=room_speaker]', (event) ->
   if event.keyCode is 13 # return = send
