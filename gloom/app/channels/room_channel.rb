@@ -13,10 +13,10 @@ class RoomChannel < ApplicationCable::Channel
   end
 
   def lowerhacklift(data)
-    Message.create! content: ("lowerhacklift " + data['message'])
+    Message.create! content: ("lowerhacklift #{data['message']}")
   end
 
   def raisehacklift(data)
-    Message.create! content: ("raisehacklift " + data['message'])
+    Message.create! content: ("raisehacklift #{data['message']}")
   end
 end
