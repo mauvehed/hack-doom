@@ -1,9 +1,11 @@
 <div class="hacklift">
   <form>
+    <br>
     <label>Raise Hacklift</label><br>
-    <input type="checkbox" data-behavior="room_raiser" sectorid="<%= hacklift.sector %>">
+    <input type="checkbox" data-behavior="room_raiser" name="sector" value="<%= hacklift.sector %>">
 
+    <br>
     <label>Lower Hacklift</label><br>
-    <input type="checkbox" data-behavior="room_lower" sectorid="<%= hacklift.sector %>">
+    <input type="checkbox" data-behavior="room_lower" name="sector" value="<%= hacklift.sector %>">
   </form>
 </div>
