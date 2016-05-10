@@ -12,6 +12,9 @@ App.room = App.cable.subscriptions.create "RoomChannel",
   speak: (message) ->
     @perform 'speak', message: message
 
+  openhackdoor: (sectorid) ->
+    @perform 'openhackdoor', message: sectorid
+
   raisehacklift: (sectorid) ->
     @perform 'raisehacklift', message: sectorid
 
@@ -23,6 +26,9 @@ $(document).on 'keypress', '[data-behavior~=room_speaker]', (event) ->
     App.room.speak event.target.value
     event.target.value =""
     event.preventDefault() 
+
+$(document).on 'mousedown', '[data-behavior~=door_opener]', (event) ->
+  App.room.openhackdoor event.target.value
 
 $(document).on 'mousedown', '[data-behavior~=room_raiser]', (event) ->
   App.room.raisehacklift event.target.value
