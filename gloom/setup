@@ -31,10 +31,15 @@ if ARGV[0] != nil then
     Dir.foreach("./db"){|x| if x.chomp =~ /.*\.sqlite3$/ then File.delete("./db/#{x.chomp}") end}
     puts `rails db:migrate`
     
-    # Load new database seeds
+    # Write new database seeds
     File.delete('./db/seeds.rb')
-    open('./db/seeds.rb', 'a') {|f|
-      f.puts "Level.create(:name => \"#{hdconfig.name}\", :areas => #{hdconfig.areas})"
+    open('./db/seeds.rb', 'a') { |f|
+      f.puts "Level.create(:name => \"#{hdconfig.name}\")"
+
+      for i in 1..hdconfig.areas do
+        f.puts "Hackdoor.create(:sector => \"#{i}\")"
+      end
+
       hdconfig.hacklifts.each do |lift|
         f.puts "Hacklift.create(:sector => \"#{lift}\")"
       end

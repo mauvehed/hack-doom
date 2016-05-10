@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160503034353) do
+ActiveRecord::Schema.define(version: 20160510052545) do
 
   create_table "challenges", force: :cascade do |t|
     t.string   "name"
@@ -30,6 +30,10 @@ ActiveRecord::Schema.define(version: 20160503034353) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "hackdoors", force: :cascade do |t|
+    t.string "sector"
+  end
+
   create_table "hacklifts", force: :cascade do |t|
     t.string   "sector"
     t.datetime "created_at", null: false
@@ -38,7 +42,6 @@ ActiveRecord::Schema.define(version: 20160503034353) do
 
   create_table "levels", force: :cascade do |t|
     t.string   "name"
-    t.integer  "areas"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
