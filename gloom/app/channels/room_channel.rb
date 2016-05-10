@@ -12,11 +12,33 @@ class RoomChannel < ApplicationCable::Channel
     Message.create! content: data['message']
   end
 
-  def lowerhacklift(data)
-    Message.create! content: ("lowerhacklift #{data['message']}")
+  # Change the map
+  def loadmap(data)
+    CertainController.update("map #{data['message']}")
   end
 
+  # Open an Area's Hackdoor
+  def openhackdoor(data)
+    CertainController.update("openhackdoor #{data['message']}")
+  end
+
+  ## Spawn enemies in an Area
+  #def spawnenemy(area, enemy)
+  #  CertainController.update("spawnenemy #{area}1 #{@enemytype[enemy]}")
+  #end
+
+  ## Spawn a powerup in an Area
+  #def spawnpowerup(data)
+  #  CertainController.update("spawnenemy #{data['area']}0 #{@poweruptype[data['item']]}")
+  #end
+
+  # Lower Hacklift
+  def lowerhacklift(data)
+    CertainController.update("lowerhacklift #{data['message']}")
+  end
+
+  # Raise Hacklift
   def raisehacklift(data)
-    Message.create! content: ("raisehacklift #{data['message']}")
+    CertainController.update("raisehacklift #{data['message']}")
   end
 end

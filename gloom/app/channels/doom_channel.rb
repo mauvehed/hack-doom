@@ -83,34 +83,4 @@ class DoomChannel < ApplicationCable::Channel
     # Send the string over to DoomServerController
     CertainController.update(datastring)
   end
-
-  # Change the map
-  def loadmap(map)
-    CertainController.update("map #{map}")
-  end
-
-  # Open an Area's Hackdoor
-  def openhackdoor(area)
-    CertainController.update("openhackdoor #{area}")
-  end
-
-  # Spawn enemies in an Area
-  def spawnenemy(area, enemy)
-    CertainController.update("spawnenemy #{area}1 #{@enemytype[enemy]}")
-  end
-
-  # Spawn a powerup in an Area
-  def spawnpowerup(area, item)
-    CertainController.update("spawnenemy #{area}0 #{@poweruptype[item]}")
-  end
-
-  # Lower a hacklift
-  def lowerhacklift(lift)
-    CertainController.update("lowerhacklift #{lift}")
-  end
-
-  # Raise a hacklift
-  def raisehacklift(lift)
-    CertainController.update("raisehacklift #{lift}")
-  end
 end
