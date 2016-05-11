@@ -11,17 +11,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160510052545) do
+ActiveRecord::Schema.define(version: 20160511051321) do
 
   create_table "challenges", force: :cascade do |t|
     t.string   "name"
     t.integer  "area"
     t.text     "flag"
-    t.integer  "difficulty"
     t.string   "type"
     t.text     "hint"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
+    t.integer  "points",     default: 0
+    t.boolean  "locked",     default: true
+    t.boolean  "solved",     default: false
   end
 
   create_table "doom_logs", force: :cascade do |t|
