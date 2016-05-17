@@ -44,17 +44,14 @@ if ARGV[0] != nil then
         f.puts "Hacklift.create(:sector => \"#{lift}\")"
       end
 
-      i = 0
-      while i < hdconfig.areas.to_i do
-        hdconfig.core[i].each do |name|
-          f.puts "Challenge.create(:name => \"#{name}\")"
+      for i in 1..hdconfig.areas do
+        hdconfig.core[(i - 1)].each do |name|
+          f.puts "Challenge.create(:name => \"#{name}\", :area => \"#{i}\")"
         end
-
-        i += 1
       end
 
       hdconfig.edge.each do |c|
-        f.puts "Challenge.create(:name => \"#{c}\")"
+        f.puts "Challenge.create(:name => \"#{c}\", :area => \"0\")"
       end
     }
     puts `rails db:seed`
