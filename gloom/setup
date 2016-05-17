@@ -7,6 +7,10 @@ class GameConfig
   attr_accessor :name, :mapname, :mapfile, :areas, :numcore, :hacklifts, :core, :edge
 end
 
+class ChallengeConfig
+  attr_accessor :name, :area, :flag, :points, :type, :hint, :locked, :solved
+end
+
 # Functions
 
 # Collect directory entries for a list
