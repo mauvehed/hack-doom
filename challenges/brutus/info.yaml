@@ -3,7 +3,7 @@ name:                 "brutus"
 author:               "FOXX"
 flag:                 "{drink_your_ovaltine}"
 level:                "1"
-type:                 "cryptography"
+category:             "cryptography"
 hint:                 "Then fall Caesar"
 description:          >
   A simple cipher hosted in a simple

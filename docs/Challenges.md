@@ -14,7 +14,7 @@ __Challenges__ comprise the core of how the *Control* team will contribute to th
   + __area:__  *Area* associated with Challenge.
   + __flag:__  plaintext solution key.
   + __points:__  value of the Challenge.
-  + __type:__  type of Challenge.
+  + __category:__  type of Challenge.
   + __hint:__  plaintext hint.
   + __locked:__ Boolean value of whether it is locked, default "true."
   + __solved:__ Boolean vlue of whether it has been solved, default "false."
@@ -27,7 +27,7 @@ __Challenges__ comprise the core of how the *Control* team will contribute to th
   + __area:__  zero.
   + __flag:__  plaintext solution key.
   + __points:__  zero.
-  + __type:__  type of Challenge.
+  + __category:__  type of Challenge.
   + __hint:__  plaintext hint.
   + __locked:__ Boolean value of whether it is locked, default "true."
   + __solved:__ Boolean vlue of whether it has been solved, default "false."

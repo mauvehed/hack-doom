@@ -3,7 +3,7 @@ name:                 "enhance"
 author:               "FOXX"
 flag:                 "{zoom_&_enhance}"
 level:                "1"
-type:                 "steganography"
+category:             "steganography"
 hint:                 "layers"
 description:          >
   There is a hidden message within this image.

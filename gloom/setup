@@ -7,10 +7,6 @@ class GameConfig
   attr_accessor :name, :mapname, :mapfile, :areas, :numcore, :hacklifts, :core, :edge
 end
 
-class ChallengeConfig
-  attr_accessor :name, :area, :flag, :points, :type, :hint, :locked, :solved
-end
-
 # Functions
 
 # Collect directory entries for a list
@@ -49,13 +45,15 @@ if ARGV[0] != nil then
       end
 
       for i in 1..hdconfig.areas do
-        hdconfig.core[(i - 1)].each do |name|
-          f.puts "Challenge.create(:name => \"#{name}\", :area => \"#{i}\")"
+        hdconfig.core[(i - 1)].each do |challname|
+          challenge = YAML::load_file("../challenges/#{challname}/info.yaml")
+          f.puts "Challenge.create(:name => \"#{challenge["name"]}\", :area => \"#{i}\", :flag => \"#{challenge["flag"]}\", :category => \"#{challenge["category"]}\", :hint => \"#{challenge["hint"]}\", :points => \"1\")"
         end
       end
 
-      hdconfig.edge.each do |c|
-        f.puts "Challenge.create(:name => \"#{c}\", :area => \"0\")"
+      hdconfig.edge.each do |challname|
+        challenge = YAML::load_file("../challenges/#{challname}/info.yaml")
+        f.puts "Challenge.create(:name => \"#{challenge["name"]}\", :area => \"0\", :flag => \"#{challenge["flag"]}\", :category => \"#{challenge["category"]}\", :hint => \"#{challenge["hint"]}\", :points => \"0\")"
       end
     }
     puts `rails db:seed`
