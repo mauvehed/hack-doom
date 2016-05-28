@@ -1,6 +1,7 @@
 class RoomsController < ApplicationController
   def show
-    @challenges = Challenge.all
+    @corechallenges = Challenge.where("area > 0")
+    @edgechallenges = Challenge.where(area: '0')
     @hackdoors = Hackdoor.all
     @hacklifts = Hacklift.all
     @messages = Message.all
