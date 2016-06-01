@@ -1,6 +1,9 @@
 <div class="hacklift">
-  <p>Raise/Lower:  
-  <%= check_box("hacklift", "sector", {data: {:behavior => "room_raiser"}}, "#{hacklift.sector}", "#{hacklift.sector}") %>
-  <%= check_box("hacklift", "sector", {data: {:behavior => "room_lower"}}, "#{hacklift.sector}", "#{hacklift.sector}") %>
-  </p>
+  <button type=button data-behavior="room_raiser" value="<%= hacklift.sector %>">
+    Raise Hacklift
+  </button>
+
+  <button type=button data-behavior="room_lower" value="<%= hacklift.sector %>">
+    Lower Hacklift
+  </button>
 </div>

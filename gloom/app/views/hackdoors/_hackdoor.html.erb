@@ -1,5 +1,5 @@
 <div class="hackdoor">
-  <p>Open Hackdoor:
-  <%= check_box("hackdoor", "sector", {data: {:behavior => "door_opener"}}, "#{hackdoor.sector}", "#{hackdoor.sector}") %>
-  </p>
+  <button type=button data-behavior="door_opener" value="<%= hackdoor.sector %>">
+    <%= "#{hackdoor.sector}" %>
+  </button>
 </div>
